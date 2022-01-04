@@ -1,55 +1,46 @@
-import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
-import {
-  ViroARScene,
-  ViroText,
-  ViroConstants,
-  ViroARSceneNavigator,
-} from '@viro-community/react-viro';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
 
-const HelloWorldSceneAR = () => {
-  const [text, setText] = useState('Initializing AR...');
+import {ModelHub, PortalHub, DeckHub} from './src/screens';
 
-  function onInitialized(state, reason) {
-    console.log('guncelleme', state, reason);
-    if (state === ViroConstants.TRACKING_NORMAL) {
-      setText('Hello World!');
-    } else if (state === ViroConstants.TRACKING_NONE) {
-      // Handle loss of tracking
-    }
-  }
+const Stack = createStackNavigator();
 
+const ModelStack = () => {
   return (
-    <ViroARScene onTrackingUpdated={onInitialized}>
-      <ViroText
-        text={text}
-        scale={[0.5, 0.5, 0.5]}
-        position={[0, 0, -1]}
-        style={styles.helloWorldTextStyle}
-      />
-    </ViroARScene>
+    <Stack.Navigator>
+      <Stack.Screen name="ModelHub" component={ModelHub} />
+    </Stack.Navigator>
   );
 };
+
+const PortalStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="PortalHub" component={PortalHub} />
+    </Stack.Navigator>
+  );
+};
+
+const DeckStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="DeckHub" component={DeckHub} />
+    </Stack.Navigator>
+  );
+};
+
+const Tab = createBottomTabNavigator();
 
 export default () => {
   return (
-    <ViroARSceneNavigator
-      autofocus={true}
-      initialScene={{
-        scene: HelloWorldSceneAR,
-      }}
-      style={styles.f1}
-    />
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Models" component={ModelStack} />
+        <Tab.Screen name="Portals" component={PortalStack} />
+        <Tab.Screen name="Deck" component={DeckStack} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
-
-var styles = StyleSheet.create({
-  f1: {flex: 1},
-  helloWorldTextStyle: {
-    fontFamily: 'Arial',
-    fontSize: 30,
-    color: '#ffffff',
-    textAlignVertical: 'center',
-    textAlign: 'center',
-  },
-});
