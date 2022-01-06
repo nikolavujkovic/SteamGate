@@ -10,7 +10,11 @@ const Stack = createStackNavigator();
 const ModelStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="ModelHub" component={ModelHub} />
+      <Stack.Screen
+        options={{headerShown: false}}
+        name="ModelHub"
+        component={ModelHub}
+      />
     </Stack.Navigator>
   );
 };
@@ -18,7 +22,11 @@ const ModelStack = () => {
 const PortalStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="PortalHub" component={PortalHub} />
+      <Stack.Screen
+        options={{headerShown: false}}
+        name="PortalHub"
+        component={PortalHub}
+      />
     </Stack.Navigator>
   );
 };
@@ -26,7 +34,11 @@ const PortalStack = () => {
 const DeckStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="DeckHub" component={DeckHub} />
+      <Stack.Screen
+        options={{headerShown: false}}
+        name="DeckHub"
+        component={DeckHub}
+      />
     </Stack.Navigator>
   );
 };
@@ -37,9 +49,21 @@ export default () => {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Models" component={ModelStack} />
-        <Tab.Screen name="Portals" component={PortalStack} />
-        <Tab.Screen name="Deck" component={DeckStack} />
+        <Tab.Screen
+          options={{headerShown: false}}
+          name="Models"
+          component={ModelStack}
+        />
+        <Tab.Screen
+          options={{headerShown: false}}
+          name="Portals"
+          component={PortalStack}
+        />
+        <Tab.Screen
+          options={{headerShown: false}}
+          name="Deck"
+          component={DeckStack}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
