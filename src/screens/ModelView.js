@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-export default function BottomTabNavigator({state, descriptors, navigation}) {
+export default function ModelView() {
   return (
     <View>
-      <Text></Text>
+      <Text>ar time</Text>
     </View>
   );
 }
