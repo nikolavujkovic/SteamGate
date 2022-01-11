@@ -3,7 +3,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {ModelHub, PortalHub, DeckHub, ModelScreen} from './src/screens';
+import {
+  ModelHub,
+  PortalHub,
+  DeckHub,
+  ModelScreen,
+  ModelView,
+} from './src/screens';
 import Icons from './src/constants/Icons';
 import TabBarButton from './src/components/TabBarButton';
 
@@ -67,35 +73,42 @@ const TabArr = [
   },
 ];
 
+const TabNavigator = () => (
+  <Tab.Navigator
+    screenOptions={{
+      headerShown: false,
+      tabBarStyle: {
+        height: 60,
+        position: 'absolute',
+        bottom: 16,
+        right: 16,
+        left: 16,
+        borderRadius: 16,
+      },
+    }}>
+    {TabArr.map((item, index) => {
+      return (
+        <Tab.Screen
+          key={index}
+          options={{
+            tabBarShowLabel: false,
+            tabBarButton: props => <TabBarButton {...props} item={item} />,
+          }}
+          name={item.route}
+          component={item.component}
+        />
+      );
+    })}
+  </Tab.Navigator>
+);
+
 export default () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={{
-          headerShown: false,
-          tabBarStyle: {
-            height: 60,
-            position: 'absolute',
-            bottom: 16,
-            right: 16,
-            left: 16,
-            borderRadius: 16,
-          },
-        }}>
-        {TabArr.map((item, index) => {
-          return (
-            <Tab.Screen
-              key={index}
-              options={{
-                tabBarShowLabel: false,
-                tabBarButton: props => <TabBarButton {...props} item={item} />,
-              }}
-              name={item.route}
-              component={item.component}
-            />
-          );
-        })}
-      </Tab.Navigator>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="TabNavigator" component={TabNavigator} />
+        <Stack.Screen name="ModelView" component={ModelView} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };

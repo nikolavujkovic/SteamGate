@@ -17,7 +17,7 @@ const bodyPadding = 16;
 // export colors to constants?
 // export bottom margin to constants!!!
 
-export default function ModelScreen() {
+export default function ModelScreen({navigation}) {
   const {
     subjectName,
     subjectImage,
@@ -28,12 +28,21 @@ export default function ModelScreen() {
   } = {
     // ...props,
     subjectName: 'Anatomija',
-    subjectImage: require('../../dummySubject.png'),
-    modelImage: require('../../dummy.png'),
-    modelTitle: 'Mozak',
-    modelText:
-      'U medicini se često koristi izraz "desno" i "lijevo" srce. Desno srce je desna pretklijetka i klijetka; u desnu pretklijetku dolazi venska krv iz tijela koja se kroz desnu klijetku pumpa u pluća.\nKrv iz desnog srca u pluća vodi plućna arterija.',
+    subjectImage: require('../../dummies/dummySubject.png'),
+    modelImage: require('../../dummies/dummy.png'),
+    modelTitle: 'Bazalne ganglije',
+    modelText: `Ovaj model prikazuje sljedece dijelove mozga:
+
+1. Bazalne ganglije
+2. Mozdano stablo
+3. Limbicki sistem
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
     themeColor: '#F16A7D',
+  };
+
+  const onStartARPressed = () => {
+    navigation.navigate('ModelView');
   };
 
   const [modelImageHeight, setModelImageHeight] = useState(0);
@@ -73,7 +82,8 @@ export default function ModelScreen() {
 
           <TouchableOpacity
             style={[styles.startARButton, {backgroundColor: themeColor}]}
-            activeOpacity={0.7}>
+            activeOpacity={0.7}
+            onPress={() => onStartARPressed()}>
             <Text style={styles.startARButtonText}>Pogledajte u AR</Text>
           </TouchableOpacity>
         </View>
