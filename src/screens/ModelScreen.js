@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import subjectConstants from '../constants/subjectConstants';
 
 const {height, width} = Dimensions.get('window');
 const bodyPadding = 16;
@@ -17,18 +18,21 @@ const bodyPadding = 16;
 // export colors to constants?
 // export bottom margin to constants!!!
 
-export default function ModelScreen({navigation}) {
+export default function ModelScreen({navigation, subjectId = 'anathomy'}) {
   const {
     subjectName,
     subjectImage,
+    themeColor,
+    bgColor,
     modelImage,
     modelTitle,
     modelText,
-    themeColor,
   } = {
     // ...props,
-    subjectName: 'Anatomija',
-    subjectImage: require('../../dummies/dummySubject.png'),
+    subjectName: subjectConstants[subjectId].subjectName,
+    subjectImage: subjectConstants[subjectId].subjectImage,
+    themeColor: subjectConstants[subjectId].themeColor,
+    bgColor: subjectConstants[subjectId].bgColor,
     modelImage: require('../../dummies/dummy.png'),
     modelTitle: 'Bazalne ganglije',
     modelText: `Ovaj model prikazuje sljedece dijelove mozga:
@@ -38,7 +42,6 @@ export default function ModelScreen({navigation}) {
 3. Limbicki sistem
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
-    themeColor: '#F16A7D',
   };
 
   const onStartARPressed = () => {
@@ -77,8 +80,17 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
               )
             }
           />
-          <Text style={styles.modelTitleStyle}>{modelTitle}</Text>
-          <Text style={styles.modelTextStyle}>{modelText}</Text>
+          <Text style={[styles.modelTitleStyle, {color: themeColor}]}>
+            {modelTitle}
+          </Text>
+          <Text
+            style={[
+              styles.modelTextStyle,
+              // {color: themeColor},
+              //
+            ]}>
+            {modelText}
+          </Text>
 
           <TouchableOpacity
             style={[styles.startARButton, {backgroundColor: themeColor}]}
@@ -115,6 +127,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: 'white',
     fontWeight: 'bold',
+    fontFamily: 'Sen-Regular',
   },
   headerImage: {
     height: '75%',
@@ -128,9 +141,9 @@ const styles = StyleSheet.create({
   },
   modelTitleStyle: {
     fontSize: 26,
-    fontWeight: 'bold',
     alignSelf: 'center',
     marginTop: 20,
+    fontFamily: 'Sen-ExtraBold',
   },
   modelImageStyle: {
     alignSelf: 'center',
@@ -140,6 +153,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 26,
     marginVertical: 15,
+    fontFamily: 'Sen-Regular',
   },
   startARButton: {
     width: '70%',
@@ -153,5 +167,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     fontSize: 20,
+    fontFamily: 'Sen-Regular',
   },
 });

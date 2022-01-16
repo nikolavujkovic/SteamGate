@@ -9,6 +9,7 @@ import {
   DeckHub,
   ModelScreen,
   ModelView,
+  PortalView,
 } from './src/screens';
 import Icons from './src/constants/Icons';
 import TabBarButton from './src/components/TabBarButton';
@@ -108,6 +109,7 @@ export default () => {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="TabNavigator" component={TabNavigator} />
         <Stack.Screen name="ModelView" component={ModelView} />
+        <Stack.Screen name="PortalView" component={PortalView} />
       </Stack.Navigator>
     </NavigationContainer>
   );
