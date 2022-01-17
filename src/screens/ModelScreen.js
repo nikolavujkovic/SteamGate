@@ -18,7 +18,7 @@ const bodyPadding = 16;
 // export colors to constants?
 // export bottom margin to constants!!!
 
-export default function ModelScreen({navigation, subjectId = 'anathomy'}) {
+export default function ModelScreen({navigation, subjectId = 'anatomy'}) {
   const {
     subjectName,
     subjectImage,

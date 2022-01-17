@@ -1,88 +1,70 @@
 export default {
   // Theres some redundancy, but it is there to make programming more managable
-  // TODO: maybe fix image sizes, my bad, should probably be 512px
-  // add the right colors for each subject (is bgColor is null then the icon should be full size)
-  anathomy: {
+  // Change the colors here to change the there for whole app
+  anatomy: {
     subjectName: 'Anatomija',
-    subjectImage: require('../assets/subjectImages/anathomy.png'),
-    cardColor: '#fff', // Color of the card in the ModelHub
-    cardBgColor: '#fff', // Background color of the icon in the ModelHub
-    themeColor: '#F16A7D', // Header and button color in ModelScreen and SubjectScreen
-    bgColor: null, // Background color of the icon in ModelScreen and SubjectScreen
-    subjectId: 'anathomy',
+    subjectImage: require('../assets/subjectImages/anatomy.png'),
+    themeColor: '#F16A7D', // Header, card, model title and button color in ModelHub, SubjectScreen and ModelScreen
+    bgColor: '#E9B3BB', // Background color of the SubjectScreen
+    subjectId: 'anatomy',
   },
   astronomy: {
     subjectName: 'Astronomija',
     subjectImage: require('../assets/subjectImages/astronomy.png'),
-    cardColor: '#fff',
-    cardBgColor: '#fff',
-    themeColor: '#5C6CFF',
-    bgColor: null,
+    themeColor: '#6C7FD8',
+    bgColor: '#A5AFDE',
     subjectId: 'astronomy',
   },
   botany: {
     subjectName: 'Botanika',
     subjectImage: require('../assets/subjectImages/botany.png'),
-    cardColor: '#fff',
-    cardBgColor: '#fff',
     themeColor: '#86B24B',
-    bgColor: null,
+    bgColor: '#C1D2AA',
     subjectId: 'botany',
   },
   electronics: {
     subjectName: 'Elektronika',
     subjectImage: require('../assets/subjectImages/electronics.png'),
-    cardColor: '#fff',
-    cardBgColor: '#fff',
-    themeColor: '#FE9738',
-    bgColor: null,
+    themeColor: '#FCC136',
+    bgColor: '#EFD69C',
     subjectId: 'electronics',
   },
   chemistry: {
     subjectName: 'Hemija',
     subjectImage: require('../assets/subjectImages/chemistry.png'),
-    cardColor: '#fff',
-    cardBgColor: '#fff',
     themeColor: '#FF7EB8',
-    bgColor: 'white',
+    bgColor: '#F0BAD2',
     subjectId: 'chemistry',
   },
   // illusions: {
   //   subjectName: 'Iluzije',
   //   subjectImage: require('../assets/subjectImages/illusions.png'),
-  //   cardColor: '#fff',
-  //   cardBgColor: '#fff',
   //   themeColor: '#FE9738',
-  //   bgColor: null,
+  //   bgColor: '#febd80',
   //   subjectId: 'illusions',
   // },
   mycology: {
     subjectName: 'Mikologija',
     subjectImage: require('../assets/subjectImages/mycology.png'),
-    cardColor: '#fff',
-    cardBgColor: '#fff',
-    themeColor: '#C9A976',
-    bgColor: 'white',
+    themeColor: '#D77F4A',
+    bgColor: '#DFBAA4',
     subjectId: 'mycology',
   },
   microbiology: {
     subjectName: 'Mikrobiologija',
     subjectImage: require('../assets/subjectImages/microbiology.png'),
-    cardColor: '#fff',
-    cardBgColor: '#fff',
-    themeColor: '#8379C1',
-    bgColor: '#F0DCF3',
+    themeColor: '#EAD359',
+    bgColor: '#E6E1C4',
     subjectId: 'microbiology',
   },
   zoology: {
     subjectName: 'Zoologija',
     subjectImage: require('../assets/subjectImages/zoology.png'),
-    cardColor: '#fff',
-    cardBgColor: '#fff',
     themeColor: '#603F42',
-    bgColor: null,
+    bgColor: '#A49495',
     subjectId: 'zoology',
   },
 };
 
-//https://stackoverflow.com/questions/46153975/using-flat-list-with-objectmap
+// How to turn a list of object properties into an array
+// https://stackoverflow.com/questions/46153975/using-flat-list-with-objectmap

@@ -30,12 +30,14 @@ export default function ModelView({navigation}) {
     modelSource,
     modelType,
     shadowVisible,
+    onGround,
     modelPositionArray,
     modelRotationArray,
     modelTitle,
   } = {
     // ...props
-    shadowVisible: true,
+    shadowVisible: false,
+    onGround: false,
     modelScale:
       // 0.01
       0.003,
