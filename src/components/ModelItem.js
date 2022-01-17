@@ -1,35 +1,20 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  FlatList,
-  Image,
-} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 
+import FastImage from 'react-native-fast-image';
 import {Dimensions} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const ModelItem = ({itemData}) => (
-  <View style={styles.itemStyle}>
-    <Text style={styles.itemText}>{itemData.name}</Text>
-    <Image style={styles.imageStyle} source={itemData.image} />
-
-    
+const ModelItem = ({backgroundCardColor, itemData}) => (
+  <View style={[styles.itemStyle, {backgroundColor: backgroundCardColor}]}>
+    <Text style={styles.itemText}>{itemData.modelName}</Text>
+    <FastImage
+      style={styles.imageStyle}
+      source={itemData.modelImage}
+      resizeMode={FastImage.resizeMode.contain}
+    />
   </View>
 );
 
@@ -46,16 +31,15 @@ const styles = StyleSheet.create({
   imageStyle: {
     flex: 0.75,
     width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
+    backgroundColor: '#ffffff',
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
   },
   itemText: {
     flex: 0.25,
-    fontSize: 20,
+    fontSize: 22,
     textAlignVertical: 'center',
-    color: '#ffffff'
+    color: '#ffffff',
   },
 });
 

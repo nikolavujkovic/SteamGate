@@ -1,63 +1,31 @@
 import React from 'react';
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
   View,
   FlatList,
-  Image,
-  ImageBackground,
 } from 'react-native';
 
 import {Dimensions} from 'react-native';
-
 import Data from '../constants/subjectConstants';
 
 import FastImage from 'react-native-fast-image';
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import SubjectItem from '../components/SubjectItem';
 
 const dataArr = Object.keys(Data).map(key => Data[key]);
 
-const ScienceItem = ({itemData}) => (
-  <View style={[styles.cardStyle, {backgroundColor: itemData.cardColor}]}>
-    <Text style={styles.cardText}>{itemData.subjectName}</Text>
-    <View style={styles.cardRightSideStyle}>
-      <View style={styles.scienceImageContainer}>
-        <FastImage
-          style={styles.scienceImageStyle}
-          source={itemData.subjectImage}
-        />
-      </View>
-    </View>
-  </View>
-);
-
 const ModelHub = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  const renderItem = ({item}) => (
-    <TouchableWithoutFeedback onPress={() => console.log('kliknut')}>
-      <ScienceItem itemData={item} />;
-    </TouchableWithoutFeedback>
-  );
+  
+  const renderItem = ({item}) => <SubjectItem itemData={item} />;
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
       <View style={styles.headerStyle}>
-        <Text style={styles.titleStyle}>Dobrodošli u <Text style={{color: '#462D8C'}}>Steam</Text><Text style={{color: '#8CE4FC'}}>Gate</Text>!
+        <Text style={styles.titleStyle}>
+          Dobrodošli u <Text style={{color: '#462D8C'}}>Steam</Text>
+          <Text style={{color: '#8CE4FC'}}>Gate</Text>!
         </Text>
         <Text style={styles.descriptionStyle}>
           Pronađite modele koji Vas interesuju i otkrijte 3D svijet nauke!

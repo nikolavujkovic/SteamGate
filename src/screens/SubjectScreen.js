@@ -1,85 +1,59 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  FlatList,
-  Image,
-} from 'react-native';
+import {StyleSheet, Text, useColorScheme, View, FlatList} from 'react-native';
 
 import {Dimensions} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import ModelItem from '../components/ModelItem';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-import ModelItem from '../components/ModelItem'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const data = [
-  {
-    key: 1,
-    name: 'srce',
-    image: require('../assets/probno_srce.jpg'),
-  },
-  {
-    key: 2,
-    name: 'srce',
-    image: require('../assets/probno_srce.jpg'),
-  },
-  {
-    key: 3,
-    name: 'srce',
-    image: require('../assets/probno_srce.jpg'),
-  },
-  {
-    key: 4,
-    name: 'srce',
-    image: require('../assets/probno_srce.jpg'),
-  },
-];
 
-const SubjectScreen = () => {
-  const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+const SubjectScreen = ({route}) => {
 
-  const renderItem = ({item}) => <ModelItem itemData={item} />;
+  const {
+    subjectName,
+    subjectImage,
+    cardColor,
+    subjectBackgroundColor,
+    themeColor,
+    subjectId,
+    modelsInfo,
+  } = route.params;
+
+  const renderItem = ({item}) => (
+    <ModelItem backgroundCardColor={themeColor} itemData={item} />
+  );
 
   return (
-    <View style={styles.backgroundStyle}>
-      <View style={styles.headerStyle}>
+    <View
+      style={[
+        styles.backgroundStyle,
+        {backgroundColor: subjectBackgroundColor},
+      ]}>
+      <View style={[styles.headerStyle, {backgroundColor: themeColor}]}>
         <View style={styles.textContainer}>
-          <Text style={styles.headerTitleStyle}>Anatomija</Text>
+          <Text style={styles.headerTitleStyle}>{subjectName}</Text>
         </View>
         <View style={styles.headerRightContainer}>
           <View style={styles.headerImageContainer}>
-            <Image
-              style={styles.headerImageStyle}
-              source={require('../assets/Anatomija_slika.png')}
-            />
+            <FastImage style={styles.headerImageStyle} source={subjectImage} />
           </View>
         </View>
       </View>
-      <View style={styles.listContainer}>
+      <View
+        style={[
+          styles.listContainer,
+          {backgroundColor: subjectBackgroundColor},
+        ]}>
         <FlatList
           columnWrapperStyle={{justifyContent: 'space-around'}}
-          data={data}
+          data={modelsInfo}
           numColumns={2}
           renderItem={renderItem}
-          style={styles.listStyle}
+          contentContainerStyle={styles.listStyle}
         />
       </View>
     </View>
@@ -91,15 +65,13 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     flexDirection: 'column',
-    backgroundColor: '#e9b3bb',
   },
   headerStyle: {
     flex: 0.2,
     flexDirection: 'row',
-    backgroundColor: '#f16a7d',
     borderBottomRightRadius: 30,
     borderBottomLeftRadius: 30,
-    paddingHorizontal: 5,
+    paddingHorizontal: 10,
   },
   textContainer: {
     flex: 0.55,
@@ -125,34 +97,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerImageContainer: {
-    width: '75%',
+    width: '80%',
     aspectRatio: 1,
-    backgroundColor: '#f1f1f1',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius:
-      Math.round(
-        Dimensions.get('window').width + Dimensions.get('window').height,
-      ) / 2,
   },
   headerImageStyle: {
     flex: 1,
     width: '90%',
     height: '90%',
     resizeMode: 'contain',
-    borderRadius:
-      Math.round(
-        Dimensions.get('window').width + Dimensions.get('window').height,
-      ) / 2,
   },
   listContainer: {
     flex: 0.8,
-    padding: 10,
-    paddingBottom: 0,
-    backgroundColor: '#e9b3bb',
+    paddingHorizontal: 10,
   },
   listStyle: {
-    flex: 1,
+    flexGrow: 1,
+    paddingTop: 10,
+    paddingBottom: 100,
   },
 });
 
