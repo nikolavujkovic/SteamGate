@@ -17,9 +17,9 @@ const Stack = createStackNavigator();
 
 const ModelStack = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="ModelScreen" component={ModelScreen} />
+    <Stack.Navigator screenOptions={{headerShown: false}}>      
       <Stack.Screen name="ModelHub" component={ModelHub} />
+      <Stack.Screen name="ModelScreen" component={ModelScreen} />
     </Stack.Navigator>
   );
 };
