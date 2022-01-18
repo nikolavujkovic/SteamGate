@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import {
   ModelHub,
+  SubjectScreen,
   PortalHub,
   DeckHub,
   ModelScreen,
@@ -19,8 +20,10 @@ const Stack = createStackNavigator();
 const ModelStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="ModelScreen" component={ModelScreen} />
       <Stack.Screen name="ModelHub" component={ModelHub} />
+      <Stack.Screen name="SubjectScreen" component={SubjectScreen} />
+      <Stack.Screen name="ModelScreen" component={ModelScreen} />
+      <Stack.Screen name="PortalHub" component={PortalHub} />
     </Stack.Navigator>
   );
 };
@@ -81,9 +84,9 @@ const TabNavigator = () => (
       tabBarStyle: {
         height: 60,
         position: 'absolute',
-        bottom: 16,
-        right: 16,
-        left: 16,
+        bottom: 12,
+        right: 12,
+        left: 12,
         borderRadius: 16,
       },
     }}>

@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import modelConstants from '../constants/modelConstants';
 import subjectConstants from '../constants/subjectConstants';
 
 const {height, width} = Dimensions.get('window');
@@ -18,7 +19,7 @@ const bodyPadding = 16;
 // export colors to constants?
 // export bottom margin to constants!!!
 
-export default function ModelScreen({navigation, subjectId = 'anatomy'}) {
+export default function ModelScreen({navigation, route}) {
   const {
     subjectName,
     subjectImage,
@@ -26,23 +27,23 @@ export default function ModelScreen({navigation, subjectId = 'anatomy'}) {
     bgColor,
     modelImage,
     modelTitle,
-    modelText,
+    modelTextLocation,
   } = {
     // ...props,
-    subjectName: subjectConstants[subjectId].subjectName,
-    subjectImage: subjectConstants[subjectId].subjectImage,
-    themeColor: subjectConstants[subjectId].themeColor,
-    bgColor: subjectConstants[subjectId].bgColor,
-    modelImage: require('../../dummies/dummy.png'),
-    modelTitle: 'Bazalne ganglije',
-    modelText: `Ovaj model prikazuje sljedece dijelove mozga:
-
-1. Bazalne ganglije
-2. Mozdano stablo
-3. Limbicki sistem
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
+    subjectName: subjectConstants[route.params.subjectId].subjectName,
+    subjectImage: subjectConstants[route.params.subjectId].subjectImage,
+    themeColor: subjectConstants[route.params.subjectId].themeColor,
+    bgColor: subjectConstants[route.params.subjectId].bgColor,
+    modelImage:
+      modelConstants[route.params.subjectId][route.params.modelId].modelImage,
+    modelTitle:
+      modelConstants[route.params.subjectId][route.params.modelId].modelTitle,
+    modelTextLocation:
+      modelConstants[route.params.subjectId][route.params.modelId]
+        .modelTextLocation,
   };
+
+  let modelText = 'nope';
 
   const onStartARPressed = () => {
     navigation.navigate('ModelView');
@@ -126,8 +127,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 30,
     color: 'white',
-    fontWeight: 'bold',
-    fontFamily: 'Sen-Regular',
+    fontFamily: 'Sen-Bold',
   },
   headerImage: {
     height: '75%',
@@ -137,13 +137,13 @@ const styles = StyleSheet.create({
 
   body: {
     padding: bodyPadding,
-    marginBottom: 76, //this is because of the bottom tabs
+    marginBottom: 80, //this is because of the bottom tabs
   },
   modelTitleStyle: {
     fontSize: 26,
     alignSelf: 'center',
     marginTop: 20,
-    fontFamily: 'Sen-ExtraBold',
+    fontFamily: 'Sen-Bold',
   },
   modelImageStyle: {
     alignSelf: 'center',
@@ -164,9 +164,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   startARButtonText: {
-    fontWeight: 'bold',
     color: 'white',
     fontSize: 20,
-    fontFamily: 'Sen-Regular',
+    fontFamily: 'Sen-Bold',
   },
 });

@@ -136,11 +136,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 26,
     alignSelf: 'center',
-    fontSize: 16,
+    fontSize: 18,
     backgroundColor: 'white',
     borderRadius: 100,
     paddingVertical: 5,
     paddingHorizontal: 16,
+    fontFamily: 'Sen-Regular',
   },
   backButton: {
     position: 'absolute',
@@ -155,8 +156,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   backButtonText: {
-    fontSize: 16,
+    fontSize: 18,
     marginLeft: 5,
+    fontFamily: 'Sen-Regular',
   },
 
   functionButtonsContainer: {
