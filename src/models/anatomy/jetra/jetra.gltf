@@ -1,0 +1,1126 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 25572,
+      "max": [
+        0.7122490406036377,
+        1.3695435523986816,
+        0.77505141496658325
+      ],
+      "min": [
+        -0.5624929666519165,
+        -0.98519974946975708,
+        -0.88799023628234863
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 306864,
+      "componentType": 5126,
+      "count": 25572,
+      "max": [
+        0.99995291233062744,
+        0.99998068809509277,
+        0.99999463558197021
+      ],
+      "min": [
+        -0.99997186660766602,
+        -0.99999785423278809,
+        -0.99935734272003174
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 25572,
+      "max": [
+        0.9999161958694458,
+        0.9999968409538269,
+        0.99994164705276489,
+        1
+      ],
+      "min": [
+        -0.99991774559020996,
+        -0.93783676624298096,
+        -0.60376828908920288,
+        1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 25572,
+      "max": [
+        0.99981993436813354,
+        0.94592839479446411
+      ],
+      "min": [
+        0.00018006916798185557,
+        0.00018006916798185557
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 204576,
+      "componentType": 5126,
+      "count": 25572,
+      "max": [
+        0.99981993436813354,
+        0.94592839479446411
+      ],
+      "min": [
+        0.00018006916798185557,
+        0.00018006916798185557
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 150528,
+      "max": [
+        25571
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 613728,
+      "componentType": 5126,
+      "count": 6300,
+      "max": [
+        0.088377319276332855,
+        0.09626452624797821,
+        0.095209628343582153
+      ],
+      "min": [
+        -0.10325825959444046,
+        -0.094890296459197998,
+        -1.0239843130111694
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 689328,
+      "componentType": 5126,
+      "count": 6300,
+      "max": [
+        0.99997544288635254,
+        0.99998283386230469,
+        0.99999380111694336
+      ],
+      "min": [
+        -0.99981379508972168,
+        -0.99999606609344482,
+        -0.99970471858978271
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 409152,
+      "componentType": 5126,
+      "count": 6300,
+      "max": [
+        0.9998626708984375,
+        0.99990999698638916,
+        0.98641383647918701,
+        1
+      ],
+      "min": [
+        -0.99983453750610352,
+        -0.99998968839645386,
+        -0.99998164176940918,
+        1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 409152,
+      "componentType": 5126,
+      "count": 6300,
+      "max": [
+        0.74507558345794678,
+        0.99986433982849121
+      ],
+      "min": [
+        0.00013571474119089544,
+        0.00013571474119089544
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 459552,
+      "componentType": 5126,
+      "count": 6300,
+      "max": [
+        0.74507558345794678,
+        0.99986433982849121
+      ],
+      "min": [
+        0.00013571474119089544,
+        0.00013571474119089544
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 602112,
+      "componentType": 5125,
+      "count": 35712,
+      "max": [
+        6299
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 764928,
+      "componentType": 5126,
+      "count": 4749,
+      "max": [
+        0.13586105406284332,
+        0.14859771728515625,
+        0.43727105855941772
+      ],
+      "min": [
+        -0.054086904972791672,
+        -0.12631401419639587,
+        -0.28592827916145325
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 821916,
+      "componentType": 5126,
+      "count": 4749,
+      "max": [
+        0.99936628341674805,
+        0.99984681606292725,
+        0.99937736988067627
+      ],
+      "min": [
+        -0.99983704090118408,
+        -0.99992203712463379,
+        -0.99870032072067261
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 509952,
+      "componentType": 5126,
+      "count": 4749,
+      "max": [
+        0.99987953901290894,
+        0.99994254112243652,
+        0.96987360715866089,
+        1
+      ],
+      "min": [
+        -0.99937427043914795,
+        -0.99811345338821411,
+        -0.9999813437461853,
+        -1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 509952,
+      "componentType": 5126,
+      "count": 4749,
+      "max": [
+        0.8971894383430481,
+        1.0025887489318848
+      ],
+      "min": [
+        0.00013719353592023253,
+        0.00013719353592023253
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 547944,
+      "componentType": 5126,
+      "count": 4749,
+      "max": [
+        0.8971894383430481,
+        1.0025887489318848
+      ],
+      "min": [
+        0.00013719353592023253,
+        0.00013719353592023253
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 744960,
+      "componentType": 5125,
+      "count": 26880,
+      "max": [
+        4748
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 878904,
+      "componentType": 5126,
+      "count": 2196,
+      "max": [
+        0.042158778756856918,
+        0.030854091048240662,
+        0.12311501801013947
+      ],
+      "min": [
+        -0.046333141624927521,
+        -0.08259233832359314,
+        -0.055466335266828537
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 905256,
+      "componentType": 5126,
+      "count": 2196,
+      "max": [
+        0.99231547117233276,
+        0.99940729141235352,
+        0.97588956356048584
+      ],
+      "min": [
+        -0.99631541967391968,
+        -0.99874013662338257,
+        -0.9999542236328125
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 585936,
+      "componentType": 5126,
+      "count": 2196,
+      "max": [
+        0.99666339159011841,
+        0.99992179870605469,
+        0.98992180824279785,
+        1
+      ],
+      "min": [
+        -0.995186448097229,
+        -0.99995726346969604,
+        -0.86745572090148926,
+        -1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 585936,
+      "componentType": 5126,
+      "count": 2196,
+      "max": [
+        0.95995616912841797,
+        0.99980050325393677
+      ],
+      "min": [
+        0.00019948121916968375,
+        0.00019948121916968375
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 603504,
+      "componentType": 5126,
+      "count": 2196,
+      "max": [
+        0.95995616912841797,
+        0.99980050325393677
+      ],
+      "min": [
+        0.00019948121916968375,
+        0.00019948121916968375
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 852480,
+      "componentType": 5125,
+      "count": 11784,
+      "max": [
+        2195
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 931608,
+      "componentType": 5126,
+      "count": 2337,
+      "max": [
+        0.090420015156269073,
+        0.2636103630065918,
+        0.22193390130996704
+      ],
+      "min": [
+        -0.016616769134998322,
+        -0.038628507405519485,
+        -0.045306496322154999
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 959652,
+      "componentType": 5126,
+      "count": 2337,
+      "max": [
+        0.99952137470245361,
+        0.99956238269805908,
+        0.98884284496307373
+      ],
+      "min": [
+        -0.9997938871383667,
+        -0.99983847141265869,
+        -0.99586349725723267
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 621072,
+      "componentType": 5126,
+      "count": 2337,
+      "max": [
+        0.99980604648590088,
+        0.99992918968200684,
+        0.99998509883880615,
+        1
+      ],
+      "min": [
+        -0.9999116063117981,
+        -0.99837577342987061,
+        -0.95014739036560059,
+        1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 621072,
+      "componentType": 5126,
+      "count": 2337,
+      "max": [
+        0.98644763231277466,
+        0.9670490026473999
+      ],
+      "min": [
+        0.024074673652648926,
+        0.0077882939949631691
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 639768,
+      "componentType": 5126,
+      "count": 2337,
+      "max": [
+        0.98644763231277466,
+        0.9670490026473999
+      ],
+      "min": [
+        0.024074673652648926,
+        0.0077882939949631691
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 899616,
+      "componentType": 5125,
+      "count": 12672,
+      "max": [
+        2336
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "ElliotSS (https://sketchfab.com/ElliotSS)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/human-liver-and-gallbladder-6c4e9bd0d49f4828b804259330c0c6c4",
+      "title": "Human liver and gallbladder"
+    },
+    "generator": "Sketchfab-8.51.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 950304,
+      "byteOffset": 0,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 658464,
+      "byteOffset": 950304,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 987696,
+      "byteOffset": 1608768,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 658464,
+      "byteOffset": 2596464,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 3254928,
+      "uri": "jetra.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "Material.011_baseColor.png"
+    },
+    {
+      "uri": "Material.011_normal.png"
+    },
+    {
+      "uri": "Material.012_baseColor.png"
+    },
+    {
+      "uri": "Material.012_metallicRoughness.png"
+    },
+    {
+      "uri": "Material.012_normal.png"
+    },
+    {
+      "uri": "Material.013_baseColor.png"
+    },
+    {
+      "uri": "Material.013_metallicRoughness.png"
+    },
+    {
+      "uri": "Material.013_normal.png"
+    },
+    {
+      "uri": "Material_baseColor.png"
+    },
+    {
+      "uri": "Material_metallicRoughness.png"
+    },
+    {
+      "uri": "Material_normal.png"
+    },
+    {
+      "uri": "Material.015_baseColor.png"
+    },
+    {
+      "uri": "Material.015_metallicRoughness.png"
+    },
+    {
+      "uri": "Material.015_normal.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": false,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Material.011",
+      "normalTexture": {
+        "index": 1,
+        "scale": 0.74290647640705176,
+        "texCoord": 0
+      },
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseColorTexture": {
+          "index": 0,
+          "texCoord": 0
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 0.064586950225802284
+      }
+    },
+    {
+      "doubleSided": false,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Material.012",
+      "normalTexture": {
+        "index": 4,
+        "scale": 0.02062179575109167,
+        "texCoord": 0
+      },
+      "occlusionTexture": {
+        "index": 3,
+        "strength": 0.40374671331642698,
+        "texCoord": 0
+      },
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseColorTexture": {
+          "index": 2,
+          "texCoord": 0
+        },
+        "metallicFactor": 0,
+        "metallicRoughnessTexture": {
+          "index": 3,
+          "texCoord": 0
+        },
+        "roughnessFactor": 0.53564217674055881
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Material.013",
+      "normalTexture": {
+        "index": 7,
+        "scale": 1,
+        "texCoord": 0
+      },
+      "occlusionTexture": {
+        "index": 6,
+        "strength": 1,
+        "texCoord": 0
+      },
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseColorTexture": {
+          "index": 5,
+          "texCoord": 0
+        },
+        "metallicFactor": 0,
+        "metallicRoughnessTexture": {
+          "index": 6,
+          "texCoord": 0
+        },
+        "roughnessFactor": 0.34722008613465621
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Material",
+      "normalTexture": {
+        "index": 10,
+        "scale": 0.17764020458934385,
+        "texCoord": 0
+      },
+      "occlusionTexture": {
+        "index": 9,
+        "strength": 1,
+        "texCoord": 0
+      },
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.76802942182117206,
+          0.76802942182117206,
+          0.76802942182117206,
+          1
+        ],
+        "baseColorTexture": {
+          "index": 8,
+          "texCoord": 0
+        },
+        "metallicFactor": 0,
+        "metallicRoughnessTexture": {
+          "index": 9,
+          "texCoord": 0
+        },
+        "roughnessFactor": 0.46655407685172789
+      }
+    },
+    {
+      "doubleSided": false,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Material.015",
+      "normalTexture": {
+        "index": 13,
+        "scale": 0.48539628591231815,
+        "texCoord": 0
+      },
+      "occlusionTexture": {
+        "index": 12,
+        "strength": 1,
+        "texCoord": 0
+      },
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.59216880392232962,
+          0.59216880392232962,
+          0.59216880392232962,
+          1
+        ],
+        "baseColorTexture": {
+          "index": 11,
+          "texCoord": 0
+        },
+        "metallicFactor": 0,
+        "metallicRoughnessTexture": {
+          "index": 12,
+          "texCoord": 0
+        },
+        "roughnessFactor": 0.62357248568998003
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "liver.001_Material.011_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3,
+            "TEXCOORD_1": 4
+          },
+          "indices": 5,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "inferior vena cava.001_Material.012_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 7,
+            "POSITION": 6,
+            "TANGENT": 8,
+            "TEXCOORD_0": 9,
+            "TEXCOORD_1": 10
+          },
+          "indices": 11,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "gallbladder.002_Material.013_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 13,
+            "POSITION": 12,
+            "TANGENT": 14,
+            "TEXCOORD_0": 15,
+            "TEXCOORD_1": 16
+          },
+          "indices": 17,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "hepatic artery.001_Material_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 19,
+            "POSITION": 18,
+            "TANGENT": 20,
+            "TEXCOORD_0": 21,
+            "TEXCOORD_1": 22
+          },
+          "indices": 23,
+          "material": 3,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "portal vein.001_Material.015_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 25,
+            "POSITION": 24,
+            "TANGENT": 26,
+            "TEXCOORD_0": 27,
+            "TEXCOORD_1": 28
+          },
+          "indices": 29,
+          "material": 4,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [
+        -0.70710678118654746,
+        -0,
+        -0,
+        0.70710678118654757
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        0.016434578225016594,
+        0,
+        0,
+        0,
+        0,
+        0.016434578225016594,
+        0,
+        0,
+        0,
+        0,
+        0.016434578225016594,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [
+        3
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "liver exported for sketchfab - now with the fucking base colours included.fbx"
+    },
+    {
+      "children": [
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        5
+      ],
+      "matrix": [
+        6.5000085830688477,
+        0,
+        0,
+        0,
+        0,
+        -1.0589858144063121e-06,
+        -6.5000085830687615,
+        0,
+        0,
+        6.5000085830687615,
+        -1.0589858144063121e-06,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "liver.001"
+    },
+    {
+      "mesh": 0,
+      "name": "liver.001_Material.011_0"
+    },
+    {
+      "children": [
+        7
+      ],
+      "matrix": [
+        6.4395603273081408,
+        0.88436003866327129,
+        -0.0090384148643951386,
+        0,
+        -0.0085058551705015032,
+        -0.0044956150919839869,
+        -6.5000014630645628,
+        0,
+        -0.88436532120814304,
+        6.4395651011096335,
+        -0.0032965412140470679,
+        0,
+        -3.0152220726013184,
+        7.079129695892334,
+        0.1193903312087059,
+        1
+      ],
+      "name": "inferior vena cava.001"
+    },
+    {
+      "mesh": 1,
+      "name": "inferior vena cava.001_Material.012_0"
+    },
+    {
+      "children": [
+        9
+      ],
+      "matrix": [
+        -4.7504902902648469,
+        -4.4257591851121649,
+        -0.30920740201910601,
+        0,
+        -1.6065642812654604,
+        1.2937908573171382,
+        6.1640220641763825,
+        0,
+        -4.1354449328010752,
+        4.5813614169683863,
+        -2.0394446192167157,
+        0,
+        0.23924024403095245,
+        -2.6040027141571045,
+        1.254441499710083,
+        1
+      ],
+      "name": "gallbladder.002"
+    },
+    {
+      "mesh": 2,
+      "name": "gallbladder.002_Material.013_0"
+    },
+    {
+      "children": [
+        11
+      ],
+      "matrix": [
+        4.419014975920418,
+        -2.9410404800521466,
+        -3.7513596358193113,
+        0,
+        0.64673276750695508,
+        5.4379615243937609,
+        -3.5014886500765021,
+        0,
+        4.7227274905495609,
+        2.0072286700514237,
+        3.9896102185676896,
+        0,
+        -0.99356591701507568,
+        -1.0825400352478027,
+        -0.68176847696304321,
+        1
+      ],
+      "name": "hepatic artery.001"
+    },
+    {
+      "mesh": 3,
+      "name": "hepatic artery.001_Material_0"
+    },
+    {
+      "children": [
+        13
+      ],
+      "matrix": [
+        3.2247518937247852,
+        -5.4719818789154564,
+        1.3814851141825506,
+        0,
+        0.084453131872334927,
+        -1.5441360264549986,
+        -6.3133686079849172,
+        0,
+        5.6430447873824336,
+        3.1501063202046575,
+        -0.69497286203945019,
+        0,
+        -1.6203439235687256,
+        -0.041242759674787521,
+        -0.34916397929191589,
+        1
+      ],
+      "name": "portal vein.001"
+    },
+    {
+      "mesh": 4,
+      "name": "portal vein.001_Material.015_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    },
+    {
+      "sampler": 0,
+      "source": 3
+    },
+    {
+      "sampler": 0,
+      "source": 4
+    },
+    {
+      "sampler": 0,
+      "source": 5
+    },
+    {
+      "sampler": 0,
+      "source": 6
+    },
+    {
+      "sampler": 0,
+      "source": 7
+    },
+    {
+      "sampler": 0,
+      "source": 8
+    },
+    {
+      "sampler": 0,
+      "source": 9
+    },
+    {
+      "sampler": 0,
+      "source": 10
+    },
+    {
+      "sampler": 0,
+      "source": 11
+    },
+    {
+      "sampler": 0,
+      "source": 12
+    },
+    {
+      "sampler": 0,
+      "source": 13
+    }
+  ]
+}
+

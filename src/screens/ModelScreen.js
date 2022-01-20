@@ -11,13 +11,12 @@ import {
 import FastImage from 'react-native-fast-image';
 import modelConstants from '../constants/modelConstants';
 import subjectConstants from '../constants/subjectConstants';
+import modelDescriptions from '../assets/modelDescriptions';
 
 const {height, width} = Dimensions.get('window');
 const bodyPadding = 16;
 
-//TODO: use react-native-fast-image
-// export colors to constants?
-// export bottom margin to constants!!!
+// export bottom padding to constants maybe?
 
 export default function ModelScreen({navigation, route}) {
   const {
@@ -27,7 +26,7 @@ export default function ModelScreen({navigation, route}) {
     bgColor,
     modelImage,
     modelTitle,
-    modelTextLocation,
+    modelText,
   } = {
     // ...props,
     subjectName: subjectConstants[route.params.subjectId].subjectName,
@@ -38,15 +37,31 @@ export default function ModelScreen({navigation, route}) {
       modelConstants[route.params.subjectId][route.params.modelId].modelImage,
     modelTitle:
       modelConstants[route.params.subjectId][route.params.modelId].modelTitle,
-    modelTextLocation:
-      modelConstants[route.params.subjectId][route.params.modelId]
-        .modelTextLocation,
+    modelText: modelDescriptions[route.params.subjectId][route.params.modelId],
   };
 
-  let modelText = 'nope';
+  const arr = modelText.split(' ');
+  const reducer = (acc, cur, index) => {
+    let previousVal = acc[acc.length - 1];
+    if (
+      previousVal &&
+      previousVal.startsWith('**') &&
+      !previousVal.endsWith('**')
+    ) {
+      acc[acc.length - 1] = previousVal + ' ' + cur;
+    } else {
+      acc.push(cur);
+    }
+    return acc;
+  };
+
+  const text = arr.reduce(reducer, []);
 
   const onStartARPressed = () => {
-    navigation.navigate('ModelView');
+    navigation.navigate('ModelView', {
+      subjectId: route.params.subjectId,
+      modelId: route.params.modelId,
+    });
   };
 
   const [modelImageHeight, setModelImageHeight] = useState(0);
@@ -90,7 +105,18 @@ export default function ModelScreen({navigation, route}) {
               // {color: themeColor},
               //
             ]}>
-            {modelText}
+            {text.map((text, index) => {
+              if (text.startsWith('**')) {
+                return (
+                  <Text
+                    key={index}
+                    style={[styles.modelTextStyle, {fontFamily: 'Sen-Bold'}]}>
+                    {text.split('**').join('')}{' '}
+                  </Text>
+                );
+              }
+              return `${text} `;
+            })}
           </Text>
 
           <TouchableOpacity
