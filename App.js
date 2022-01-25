@@ -11,6 +11,8 @@ import {
   ModelScreen,
   ModelView,
   PortalView,
+  DeckView,
+  AssignCard,
 } from './src/screens';
 import Icons from './src/constants/Icons';
 import TabBarButton from './src/components/TabBarButton';
@@ -113,6 +115,8 @@ export default () => {
         <Stack.Screen name="TabNavigator" component={TabNavigator} />
         <Stack.Screen name="ModelView" component={ModelView} />
         <Stack.Screen name="PortalView" component={PortalView} />
+        <Stack.Screen name="DeckView" component={DeckView} />
+        <Stack.Screen name="AssignCard" component={AssignCard} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -5,6 +5,8 @@ import ModelScreen from './ModelScreen';
 import SubjectScreen from './SubjectScreen';
 import ModelView from './ModelView';
 import PortalView from './PortalView';
+import DeckView from './DeckView';
+import AssignCard from './AssignCard';
 
 export {
   ModelHub,
@@ -14,4 +16,6 @@ export {
   ModelView,
   PortalView,
   SubjectScreen,
+  DeckView,
+  AssignCard,
 };

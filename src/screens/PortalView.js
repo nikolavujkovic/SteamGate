@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, {Component} from 'react';
 import {
   View,
   Text,
@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   BackHandler,
 } from 'react-native';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {
   ViroARSceneNavigator,
   ViroARScene,

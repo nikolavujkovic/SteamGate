@@ -12,6 +12,7 @@ import FastImage from 'react-native-fast-image';
 import modelConstants from '../constants/modelConstants';
 import subjectConstants from '../constants/subjectConstants';
 import modelDescriptions from '../assets/modelDescriptions';
+import Icons from '../constants/Icons';
 
 const {height, width} = Dimensions.get('window');
 const bodyPadding = 16;
@@ -66,6 +67,22 @@ export default function ModelScreen({navigation, route}) {
 
   const [modelImageHeight, setModelImageHeight] = useState(0);
 
+  const blackColorCondition = () => {
+    switch (route.params.subjectId) {
+      case 'mycology':
+        return false;
+      default:
+        return false;
+    }
+  };
+
+  const addToDeck = (SID, MID) => {
+    navigation.navigate('AssignCard', {
+      SID: SID,
+      MID: MID,
+    });
+  };
+
   return (
     <SafeAreaView style={[styles.f1, styles.bgw]}>
       {/* header */}
@@ -119,12 +136,26 @@ export default function ModelScreen({navigation, route}) {
             })}
           </Text>
 
-          <TouchableOpacity
-            style={[styles.startARButton, {backgroundColor: themeColor}]}
-            activeOpacity={0.7}
-            onPress={() => onStartARPressed()}>
-            <Text style={styles.startARButtonText}>Pogledajte u AR</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[styles.startARButton, {backgroundColor: themeColor}]}
+              activeOpacity={0.7}
+              onPress={() => onStartARPressed()}>
+              <Text style={styles.startARButtonText}>Pogledajte u AR</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.addToDeckButton, {backgroundColor: themeColor}]}
+              activeOpacity={0.7}
+              onPress={() =>
+                addToDeck(route.params.subjectId, route.params.modelId)
+              }>
+              <Icons.MaterialCommunityIcons
+                name="cards-spade"
+                size={35}
+                color={blackColorCondition() ? 'black' : 'white'}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -181,17 +212,28 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     fontFamily: 'Sen-Regular',
   },
+
+  buttonContainer: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+  },
   startARButton: {
-    width: '70%',
+    width: width * 0.5,
     padding: 20,
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 20,
+    borderRadius: 100,
+    marginRight: 10,
   },
   startARButtonText: {
     color: 'white',
     fontSize: 20,
     fontFamily: 'Sen-Bold',
+  },
+  addToDeckButton: {
+    //FIXME: questionaable
+    padding: 15,
+    borderRadius: 100,
   },
 });

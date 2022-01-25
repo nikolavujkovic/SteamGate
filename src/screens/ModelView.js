@@ -89,40 +89,39 @@ export default function ModelView({route, navigation}) {
         console.log('tracking...');
       }}>
       <GroundComponent>
-        <ViroAmbientLight color="#fff" />
+        {shadowVisible && (
+          <ViroSpotLight
+            innerAngle={5}
+            outerAngle={25}
+            direction={[0, -1, -0.2]}
+            position={[0, 3, 1]}
+            color="#000"
+            castsShadow={true}
+            shadowMapSize={2048}
+            shadowNearZ={2}
+            shadowFarZ={5}
+            shadowOpacity={1}
+          />
+        )}
 
+        <ViroAmbientLight color="#fff" />
         <Viro3DObject
-          position={modelPositionArray}
+          position={onGround ? undefined : modelPositionArray}
           rotation={modelRotationArray}
           source={modelSource}
           resources={modelResourcesArr}
           scale={[modelScale, modelScale, modelScale]}
           type={modelType}
+          // animation={{name: 'Take 001', run: true, loop: true, delay: 0}}
         />
 
         {shadowVisible && (
-          <>
-            <ViroSpotLight
-              innerAngle={5}
-              outerAngle={25}
-              direction={[0, -1, -0.2]}
-              position={[0, 3, 1]}
-              color="#444"
-              castsShadow={true}
-              shadowMapSize={2048}
-              shadowNearZ={2}
-              shadowFarZ={5}
-              shadowOpacity={0.3}
-            />
-
-            <ViroQuad
-              position={[0, 0, -6]}
-              rotation={[-90, 0, 0]}
-              width={4}
-              height={4}
-              arShadowReceiver={true}
-            />
-          </>
+          <ViroQuad
+            rotation={[-90, 0, 0]}
+            width={10}
+            height={10}
+            arShadowReceiver={true}
+          />
         )}
       </GroundComponent>
     </ViroARScene>
