@@ -23,7 +23,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeckLoading from '../components/DeckLoading';
 
 const initText = ['Skenirajte kartu...'];
-const scaleDivider = 5;
 
 class DeckView extends Component {
   state = {
@@ -35,7 +34,7 @@ class DeckView extends Component {
     backAllowed: false,
     ARSCENE: null,
     ready: false,
-    selectedAstro: Math.floor(Math.random() * 2),
+    selectedAstro: Math.floor(Math.random() * 3),
     fadeAnim: new Animated.Value(1),
   };
 
@@ -61,7 +60,7 @@ class DeckView extends Component {
       foundModelTitle: initText,
       ready: false,
       backAllowed: false,
-      selectedAstro: Math.floor(Math.random() * 2),
+      selectedAstro: Math.floor(Math.random() * 3),
       fadeAnim: new Animated.Value(1),
     });
 
@@ -130,6 +129,7 @@ class DeckView extends Component {
         this.setState({
           ARSCENEchildren: markerArr.map((item, index) => {
             console.log('test');
+            const scaleDivider = item.scaleDivider ? item.scaleDivider : 1;
             if (
               item != null
               // && //THIS MAY IMPROVE PERFORMANCE SO ITS JUST A "just-in-case feature"
@@ -157,7 +157,7 @@ class DeckView extends Component {
                     this.setState({onlyVisible: item.modelTarget});
                   }}>
                   <Viro3DObject
-                    position={[0, 0, -0.03]}
+                    position={[0, 0, 0]}
                     source={item.modelSource}
                     resources={item.modelResourcesArr}
                     scale={[
@@ -202,11 +202,11 @@ class DeckView extends Component {
     );
 
     setTimeout(() => {
-      this.setState({backAllowed: true, ready: true});
+      this.setState({backAllowed: true});
       this.fadeOut();
     }, 3000);
     setTimeout(() => {
-      this.setState({backAllowed: true});
+      this.setState({ready: true});
     }, 3500);
 
     this.arRender();

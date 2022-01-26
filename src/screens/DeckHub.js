@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
+const heightLandmark = Dimensions.get('window').height * 0.01;
+
 export default function DeckHub({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
@@ -88,22 +90,22 @@ const styles = StyleSheet.create({
     width: '50%',
     height: undefined,
     aspectRatio: 1,
-    marginTop: 40,
+    marginTop: heightLandmark * 4,
   },
   title: {
     fontFamily: 'Sen-Bold',
     color: 'black',
     fontSize: 38,
     textAlign: 'center',
-    marginTop: 30,
+    marginTop: heightLandmark * 3,
   },
   subtitle: {
     fontFamily: 'Sen-Regular',
     color: 'black',
     fontSize: 22,
     textAlign: 'center',
-    marginTop: 30,
-    marginBottom: 40,
+    marginTop: heightLandmark * 3,
+    marginBottom: heightLandmark * 4,
   },
   paragraph: {
     fontFamily: 'Sen-Regular',
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 50,
+    marginTop: heightLandmark * 5,
   },
   buttonText: {
     color: 'white',
