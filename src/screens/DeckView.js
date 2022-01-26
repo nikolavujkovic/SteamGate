@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   BackHandler,
+  Animated,
 } from 'react-native';
 import React, {Component} from 'react';
 import {
@@ -19,8 +20,9 @@ import deckConstants from '../constants/deckConstants';
 import modelConstants from '../constants/modelConstants';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import DeckLoading from '../components/DeckLoading';
 
-const initText = 'Skenirajte kartu...';
+const initText = ['Skenirajte kartu...'];
 const scaleDivider = 5;
 
 class DeckView extends Component {
@@ -31,6 +33,10 @@ class DeckView extends Component {
     anyCardsAssigned: true,
     ARSCENEchildren: null,
     backAllowed: false,
+    ARSCENE: null,
+    ready: false,
+    selectedAstro: Math.floor(Math.random() * 2),
+    fadeAnim: new Animated.Value(1),
   };
 
   backAction = () => {
@@ -40,11 +46,36 @@ class DeckView extends Component {
     return true;
   };
 
+  fadeOut = () => {
+    Animated.timing(this.state.fadeAnim, {
+      toValue: 0,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
   refreshHandler = () => {
-    this.setState({onlyVisible: null, ARSCENEchildren: null});
-    this.setState({foundModelTitle: initText});
-    this.forceUpdate();
+    this.setState({
+      ARSCENE: null,
+      onlyVisible: null,
+      foundModelTitle: initText,
+      ready: false,
+      backAllowed: false,
+      selectedAstro: Math.floor(Math.random() * 2),
+      fadeAnim: new Animated.Value(1),
+    });
+
+    setTimeout(() => {
+      this.setState({backAllowed: true});
+      this.fadeOut();
+    }, 5000);
+    setTimeout(() => {
+      this.setState({ready: true});
+    }, 5500);
+
     this.arRender();
+
+    console.log('Refreshed!');
   };
 
   getItemFromId = async key => {
@@ -67,9 +98,7 @@ class DeckView extends Component {
     const doSmthAsync = async (key, index) => {
       const {subjectId, modelId} = await this.getItemFromId(key);
 
-      //FIXME: check if repetitiveness effects performance
-      // if (index > 3) return null;
-      console.log('current', key, subjectId, modelId);
+      // console.log('current', key, subjectId, modelId);
       if (!subjectId || !modelId) return null;
 
       return {
@@ -102,9 +131,10 @@ class DeckView extends Component {
           ARSCENEchildren: markerArr.map((item, index) => {
             console.log('test');
             if (
-              item != null &&
-              (item.modelTarget == this.state.onlyVisible ||
-                this.state.onlyVisible == null)
+              item != null
+              // && //THIS MAY IMPROVE PERFORMANCE SO ITS JUST A "just-in-case feature"
+              // (item.modelTarget == this.state.onlyVisible ||
+              //   this.state.onlyVisible == null)
             ) {
               return (
                 <ViroARImageMarker
@@ -112,11 +142,22 @@ class DeckView extends Component {
                   target={item.modelTarget}
                   onAnchorFound={() => {
                     console.log('ANCHOR FOUND BBY');
-                    this.setState({foundModelTitle: item.modelTitle});
+                    this.setState(
+                      this.state.foundModelTitle === initText
+                        ? {foundModelTitle: [item.modelTitle]}
+                        : {
+                            foundModelTitle: [
+                              ...new Set([
+                                ...this.state.foundModelTitle,
+                                item.modelTitle,
+                              ]),
+                            ],
+                          },
+                    );
                     this.setState({onlyVisible: item.modelTarget});
                   }}>
                   <Viro3DObject
-                    position={[0, 0, 0]}
+                    position={[0, 0, -0.03]}
                     source={item.modelSource}
                     resources={item.modelResourcesArr}
                     scale={[
@@ -132,7 +173,21 @@ class DeckView extends Component {
           }),
         });
 
-        console.log(this.state.ARSCENEchildren);
+        console.log('ARSCENEchildren:', this.state.ARSCENEchildren);
+        const newARSCENE = () => (
+          <ViroARScene>
+            <ViroAmbientLight color="#ffffff" />
+            {this.state.ARSCENEchildren}
+          </ViroARScene>
+        );
+        this.setState({
+          ARSCENE: (
+            <ViroARSceneNavigator
+              autofocus
+              initialScene={{scene: newARSCENE}}
+            />
+          ),
+        });
       })
       .catch(e => {
         console.warn(e);
@@ -140,40 +195,49 @@ class DeckView extends Component {
   };
 
   componentDidMount() {
+    console.log('Component will mount');
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       this.backAction,
     );
 
     setTimeout(() => {
+      this.setState({backAllowed: true, ready: true});
+      this.fadeOut();
+    }, 3000);
+    setTimeout(() => {
       this.setState({backAllowed: true});
-    }, 2000);
+    }, 3500);
 
     this.arRender();
+
+    console.log('Component did mount');
   }
 
   componentWillUnmount() {
     this.setState({shouldHide: true});
     this.backHandler.remove();
+    console.log('component unmounted called');
   }
 
   render() {
+    const logArray = ['pizzaaaa', 'soupppp', 'buuuurger'];
+    console.log(logArray[this.state.selectedAstro]);
     //// AR stuff onwards
 
     let selectedDeck = JSON.parse(JSON.stringify(deckConstants.playingCards));
     ViroARTrackingTargets.createTargets(selectedDeck);
 
-    const ARSCENE = () => (
-      <ViroARScene>
-        <ViroAmbientLight color="#ffffff" />
-        {this.state.ARSCENEchildren}
-      </ViroARScene>
-    );
+    if (this.state.ARSCENE === null) console.log('ARSCENE IS NULL');
 
     return this.state.shouldHide ? null : (
       <>
-        <ViroARSceneNavigator autofocus initialScene={{scene: ARSCENE}} />
-        <Text style={styles.title}>{this.state.foundModelTitle}</Text>
+        {this.state.ARSCENE}
+        <Text style={styles.title}>
+          {this.state.foundModelTitle.reduce(
+            (prev, curr) => (prev = prev + ' | ' + curr),
+          )}
+        </Text>
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
             activeOpacity={0.9}
@@ -217,6 +281,18 @@ class DeckView extends Component {
               pa se vratite kasnije!
             </Text>
           </View>
+        )}
+
+        {!this.state.ready && (
+          <Animated.View
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              opacity: this.state.fadeAnim,
+            }}>
+            <DeckLoading selected={this.state.selectedAstro} />
+          </Animated.View>
         )}
       </>
     );
