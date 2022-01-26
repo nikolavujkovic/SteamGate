@@ -30,9 +30,11 @@ class DeckView extends Component {
     onlyVisible: null,
     anyCardsAssigned: true,
     ARSCENEchildren: null,
+    backAllowed: false,
   };
 
   backAction = () => {
+    if (!this.state.backAllowed) return true;
     this.setState({shouldHide: true});
     this.props.navigation.goBack();
     return true;
@@ -132,7 +134,9 @@ class DeckView extends Component {
 
         console.log(this.state.ARSCENEchildren);
       })
-      .catch(e => console.warn(e));
+      .catch(e => {
+        console.warn(e);
+      });
   };
 
   componentDidMount() {
@@ -141,7 +145,16 @@ class DeckView extends Component {
       this.backAction,
     );
 
+    setTimeout(() => {
+      this.setState({backAllowed: true});
+    }, 2000);
+
     this.arRender();
+  }
+
+  componentWillUnmount() {
+    this.setState({shouldHide: true});
+    this.backHandler.remove();
   }
 
   render() {

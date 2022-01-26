@@ -14,6 +14,7 @@ import subjectConstants from '../constants/subjectConstants';
 import Icons from '../constants/Icons';
 import FastImage from 'react-native-fast-image';
 import {useState} from 'react/cjs/react.development';
+import Toast from 'react-native-simple-toast';
 
 const {height, width} = Dimensions.get('window');
 
@@ -21,6 +22,7 @@ export default function AssignCard({route, navigation}) {
   const {SID, MID} = route.params;
   const themeColor = subjectConstants[SID].themeColor;
   const [cardState, setCardState] = useState([]);
+  const [noToastCurrently, setNoToastCurrently] = useState(true);
 
   const selectedDeck = JSON.parse(JSON.stringify(deckConstants.playingCards));
   const cardData = Object.keys(selectedDeck).map(key => ({
@@ -81,6 +83,7 @@ export default function AssignCard({route, navigation}) {
     let selectedDeck = JSON.parse(JSON.stringify(deckConstants.playingCards));
     let theIndex;
     let newState = JSON.parse(JSON.stringify(cardState));
+    let text = 'Karta uspješno dodjeljena';
 
     Promise.all(
       Object.keys(selectedDeck).map(async (key, index) => {
@@ -108,6 +111,24 @@ export default function AssignCard({route, navigation}) {
         console.log('done twice');
 
         try {
+          const value = await AsyncStorage.getItem(CID);
+          let recievedModelId, recievedSubjectId;
+          if (value) {
+            const [recievedSubjectId2, recievedModelId2] = value.split('|');
+            recievedModelId = recievedModelId2;
+            recievedSubjectId = recievedSubjectId2;
+          } else {
+            recievedModelId = null;
+            recievedSubjectId = null;
+          }
+          if (
+            (recievedSubjectId !== SID || parseInt(recievedModelId) !== MID) &&
+            recievedModelId &&
+            recievedSubjectId
+          ) {
+            text = 'Vrijednost karte zamjenjena';
+          }
+
           await AsyncStorage.setItem(CID, SID + '|' + MID.toString());
           newState[theIndex] = {
             id: CID,
@@ -121,6 +142,14 @@ export default function AssignCard({route, navigation}) {
         }
 
         setCardState(newState);
+
+        if (noToastCurrently) {
+          Toast.show(text, Toast.SHORT);
+          setNoToastCurrently(false);
+          setTimeout(() => {
+            setNoToastCurrently(true);
+          }, 1750);
+        }
       })
       .catch(e => console.warn(e));
   };

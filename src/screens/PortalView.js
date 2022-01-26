@@ -23,10 +23,12 @@ class PortalViewClass extends Component {
     isPaused: false,
     isMuted: false,
     shouldHide: false,
+    backAllowed: false,
     // navigation: this.props.navigation,
   };
 
   backAction = () => {
+    if (!this.state.backAllowed) return true;
     this.setState({shouldHide: true});
     this.props.navigation.goBack();
     return true;
@@ -37,6 +39,10 @@ class PortalViewClass extends Component {
       'hardwareBackPress',
       this.backAction,
     );
+
+    setTimeout(() => {
+      this.setState({backAllowed: true});
+    }, 2000);
   }
 
   componentWillUnmount() {
@@ -49,13 +55,6 @@ class PortalViewClass extends Component {
       portalTitle: 'Neki kul video svemira',
       portalVideoSource: require('../videos/sub.mp4'),
     };
-
-    // useFocusEffect(() => {
-    //   this.setState({shouldHide: false});
-    //   return () => {
-    //     this.setState({shouldHide: true});
-    //   };
-    // });
 
     const toggleVideoPlayback = () => {
       this.setState({isPaused: !this.state.isPaused});

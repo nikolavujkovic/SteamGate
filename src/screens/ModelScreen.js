@@ -16,6 +16,7 @@ import Icons from '../constants/Icons';
 
 const {height, width} = Dimensions.get('window');
 const bodyPadding = 16;
+const headerHeight = 80;
 
 // export bottom padding to constants maybe?
 
@@ -66,6 +67,7 @@ export default function ModelScreen({navigation, route}) {
   };
 
   const [modelImageHeight, setModelImageHeight] = useState(0);
+  const [subjectImageWidth, setSubjectImageWidth] = useState(0); // per il logo
 
   const blackColorCondition = () => {
     switch (route.params.subjectId) {
@@ -88,7 +90,16 @@ export default function ModelScreen({navigation, route}) {
       {/* header */}
       <View style={[styles.header, {backgroundColor: themeColor}]}>
         <Text style={styles.headerText}>{subjectName}</Text>
-        <FastImage style={styles.headerImage} source={subjectImage} />
+        <FastImage
+          style={[styles.headerImage, {width: subjectImageWidth}]}
+          source={subjectImage}
+          onLoad={evt =>
+            setSubjectImageWidth(
+              (evt.nativeEvent.width / evt.nativeEvent.height) *
+                (0.75 * headerHeight),
+            )
+          }
+        />
       </View>
 
       {/* body */}
@@ -175,7 +186,7 @@ const styles = StyleSheet.create({
 
   header: {
     flex: 1,
-    maxHeight: 80,
+    maxHeight: headerHeight,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -188,8 +199,6 @@ const styles = StyleSheet.create({
   },
   headerImage: {
     height: '75%',
-    width: undefined,
-    aspectRatio: 1,
   },
 
   body: {
@@ -209,13 +218,14 @@ const styles = StyleSheet.create({
   modelTextStyle: {
     fontSize: 20,
     lineHeight: 26,
-    marginVertical: 15,
+    marginVertical: 25,
     fontFamily: 'Sen-Regular',
   },
 
   buttonContainer: {
     flexDirection: 'row',
     alignSelf: 'center',
+    marginTop: 5,
   },
   startARButton: {
     width: width * 0.5,
@@ -233,6 +243,7 @@ const styles = StyleSheet.create({
   },
   addToDeckButton: {
     //FIXME: questionaable
+    // theory is that icon size = font size so it will be at the samo level
     padding: 15,
     borderRadius: 100,
   },
