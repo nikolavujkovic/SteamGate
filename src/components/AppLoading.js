@@ -47,6 +47,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     bottom: 16,
     fontSize: 16,
-    fontFamily: 'JosefinSans-Regular',
+    fontFamily: 'JosefinSans-SemiBold',
   },
 });

@@ -1,6 +1,6 @@
 export default {
   anatomy: [
-    `**Ciroza** je hronična bolest jetre koju obilježava oštećenje **jetrenog tkiva**. 
+    `**Ciroza** je **hronična** bolest jetre koju oštećenje **jetrenog tkiva** obilježava.
 To oštećenje podrazumijeva stvaranje fibroznih ožiljaka i progresivno **propadanje jetrene funkcije,** nakupljanje tečnosti u abdomenu (ascites), krvarenja (koagulopatija), povišen pritisak u portalnim krvnim žilama (portalna hipertenzija) i poremećaj određenih mozgovnih funkcija (hepatička encefalopatija).`,
 
     `**Mozak** je najznačajniji dio **nervnog sistema.** 
@@ -32,7 +32,7 @@ Oblik Zemlje je veoma sličan obliku troosnog rotacionog elipsoida. Ipak ovo geo
   ],
   botany: [
     `**Tratinčica** je vrlo rasprostranjena trajna **livadska biljka.** Na 4-15 cm visokim stabljikama nosi u sredini **žute** a na rubu **bijele** ili crvenkasto-bijele cvjetne glavice, oko 15, iznimno do 30 mm široke.
-  **Omotač** je polukuglast, složen u dva reda od **duguljastih dlakavih listića.** Listovi su lopatičastog ili jajastog oblika, s jednom provodnom žilom u sredini, nepotpuno i nejasno nazubljeni.`,
+**Omotač** je polukuglast, složen u dva reda od **duguljastih dlakavih listića.** Listovi su lopatičastog ili jajastog oblika, s jednom provodnom žilom u sredini, nepotpuno i nejasno nazubljeni.`,
 
     `**Anturijum,** još poznat i kao **flamingov cvijet** je zimzelena biljka čija visina dostiže oko 75 cm. 
 Listovi anturijuma su krupni, tamnozeleni, tvrdi, kožasti, sjajni i stoje gusto na čvrstim peteljkama. Kod odraslih biljaka listovi dostižu dužinu od oko 30 cm, sa drškom otprilike iste dužine. Anturijum spada **stalno cvijetajuće** biljke, može da cvjeta mjesecima.
@@ -42,7 +42,7 @@ Listovi anturijuma su krupni, tamnozeleni, tvrdi, kožasti, sjajni i stoje gusto
 Listovi mimoze imaju rastavljeni oblik, a deblo je vrlo **trnovito.** U razdoblju **cvjetanja** se na ovoj biljci pojavljuje veliki broj malih **žutih cvjetova** koji se skupljaju u kuglice. S vremenom se pretvaraju u **cvatove,** kombujući se se u četke.`,
 
     `**Paprati** ili **papratnice** pripadaju jednoj od najstarijih grupa nižih biljaka sa jasno izraženom smjenom nepolne (saprofit) i polne (gametofit) faze kao i jako krupnim listovima (makrofilija) i odsustvom **sekundarne građe** i **sjemena.** 
-Mogu biti visoke i do **25 m,** a njihovo drvenasto stablo može imati prečnik i do **50 cm.** Pravi **korijen ,** koji se razvija iz korjenka klice, brzo prestaje sa rastom, pa njegovu ulogu preuzimaju **adventivni korjenovi** koji se razvijaju na podzemnom stablu. 
+Mogu biti visoke i do **25 m,** a njihovo drvenasto stablo može imati prečnik i do **50 cm.** Pravi **korijen,** koji se razvija iz korjenka kliceå brzo prestaje sa rastom, pa njegovu ulogu preuzimaju **adventivni korjenovi** koji se razvijaju na podzemnom stablu. 
   **Stablo** kod papratnjača može imati različit oblik i anatomsku građu i najčešće je kod zeljastih paprati uvučeno u zemlju.`,
   ],
   electronics: [
@@ -86,11 +86,11 @@ Zbog toga se mliječna kiselina svrstava i u grupu **alfa hidroksilnih kiselina*
 **Šeširić** joj je crven sa **bijelim tačkama,** koje su ljepljive i ispiraju se kišama. Na dršci se nalazi omotač velum. 
 Razmnožava se **polno** bazidiosporama koje se nalaze u bazidijama ispod šeširića.`,
 
-    `**Šitake gljiva** je **jestiva** gljiva, udomaćena u istočnoj Aziji, gdje se uzgaja i koristi kao **hrana** i **lijek** u brojnim azijskim zemljama , a već više od 20 godina i u cijelom svijetu. 
+    `**Šitake gljiva** je **jestiva** gljiva, udomaćena u istočnoj Aziji, gdje se uzgaja i koristi kao **hrana** i **lijek** u brojnim azijskim zemljama, a već više od 20 godina i u cijelom svijetu. 
 Šitake pečurke su veoma ukusne, imaju intenzivnu aromu, a tekstura im je poput bukovače, dakle, veoma podsjećaju na meso. Mogu se od njih pripremati razna jela, a mogu se i samostalno konzumirati.`,
 
     `**Sunčanica** je poznata i cijenjena **jestiva** gljiva. 
-Ima klobuk širok od 10 do 30 centimetara , u mladosti okrugao ili jajolik, na kraju otvoren i na obodu čehav, u središtu je vidljivo ispupčen. emelj joj je svijetlosmeđi,a ispupčenje je tamnosmeđe i tvrdo. Listići su gusti, bijeli, mekani, drže se za ovratnik tako da su odmaknuti od stručka otprilike 1,5 mm. Stručak je visok od 20 do 40 centimetara, vitak, cilindričan, vlaknast, šupalj, tvrd, na dnu gomoljasto odebljan, smeđe išaran; nosi prsten pomičan po stručku.`,
+Ima klobuk širok od 10 do 30 centimetara, u mladosti okrugao ili jajolik, na kraju otvoren i na obodu čehav, u središtu je vidljivo ispupčen. Temelj joj je svijetlosmeđi, a ispupčenje je tamnosmeđe i tvrdo. Listići su gusti, bijeli, mekani, drže se za ovratnik tako da su odmaknuti od stručka otprilike 1,5 mm. Stručak je visok od 20 do 40 centimetara, vitak, cilindričan, vlaknast, šupalj, tvrd, na dnu gomoljasto odebljan, smeđe išaran; nosi prsten pomičan po stručku.`,
 
     `**Brezov ded** u narodu poznat i kao turčin je **jestiva** vrsta gljive iz porodice vrganja. 
 U šumama se može sresti od juna do oktobra, česta vrsta. Široko je rasprostranjen u severnoj hemisferi. Klobuk je u nijansama svijetle i tamne braon boje, somotast prečnika do 20 cm. Kod mlađih primjeraka je poluloptast, kasnije raširen. Cjevčice i pore su prvo bele boje, kasnije svijetlosive, na dodir poprimaju smeđu boju. Drška je bijele boje sa gusto raspoređenim sitnim ljuspama tamne boje, vitka i ponekad vijugava.`,
