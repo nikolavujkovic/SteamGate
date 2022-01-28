@@ -15,17 +15,14 @@ import {
   ViroQuad,
   Viro3DObject,
   ViroARPlane,
-  ViroAnimations,
+  ViroMaterials,
 } from '@viro-community/react-viro';
 import Icons from '../constants/Icons';
 import modelConstants from '../constants/modelConstants';
 import subjectConstants from '../constants/subjectConstants';
 
 class ModelView extends Component {
-  //FIXME: MODEL RESOURCES CANT BE OF THE SAME NAME
   // fix shadow
-  //TODO: add rotation and postition parameters but with default values
-  // make it invisible until it finds an anchor
 
   state = {
     shouldHide: false,
@@ -34,6 +31,7 @@ class ModelView extends Component {
     specialAnimationRunning: false,
     specialAnimationName: '',
     runAnimation: true,
+    modelVisible: false,
   };
 
   backAction = () => {
@@ -83,7 +81,7 @@ class ModelView extends Component {
       modelResourcesArr: modelConstants[SID][MID].modelResourcesArr,
       modelPositionArray: modelConstants[SID][MID].modelPositionArray
         ? modelConstants[SID][MID].modelPositionArray
-        : [0, 0, -0.5],
+        : [0, 0, 0],
       modelRotationArray: modelConstants[SID][MID].modelRotationArray
         ? modelConstants[SID][MID].modelRotationArray
         : [0, 0, 0],
@@ -95,6 +93,11 @@ class ModelView extends Component {
         ? modelConstants[SID][MID].specialAnimations
         : null,
     };
+
+    let spotlightPositionArray = [...modelPositionArray];
+    spotlightPositionArray[0] -= 1;
+    spotlightPositionArray[1] += 3;
+    spotlightPositionArray[2] += 0.5;
 
     const GroundComponent = props => {
       if (onGround) {
@@ -108,27 +111,31 @@ class ModelView extends Component {
 
     const ARSCENE = () => (
       <ViroARScene
-        onTrackingUpdated={() => {
-          console.log('tracking...');
+        onAnchorFound={() => {
+          console.log('andhor found...');
+          this.setState({modelVisible: true});
         }}>
         <GroundComponent>
           {shadowVisible && (
             <ViroSpotLight
-              innerAngle={5}
-              outerAngle={25}
-              direction={[0, -1, -0.2]}
-              position={[0, 3, 1]}
-              color="#000"
+              innerAngle={30}
+              outerAngle={90}
+              direction={[0.3, -0.8, -0.5]}
+              position={spotlightPositionArray}
+              color="#fff"
               castsShadow={true}
               shadowMapSize={2048}
               shadowNearZ={2}
               shadowFarZ={5}
-              shadowOpacity={1}
+              shadowOpacity={0.2}
+              intensity={100}
             />
           )}
 
-          <ViroAmbientLight color="#fff" />
+          {!shadowVisible && <ViroAmbientLight color="#fff" />}
+
           <Viro3DObject
+            visible={this.state.modelVisible}
             position={onGround ? undefined : modelPositionArray}
             rotation={modelRotationArray}
             source={modelSource}

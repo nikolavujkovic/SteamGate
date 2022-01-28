@@ -24,6 +24,7 @@ class PortalViewClass extends Component {
     isMuted: false,
     shouldHide: false,
     backAllowed: false,
+    portalVisible: false,
     // navigation: this.props.navigation,
   };
 
@@ -64,10 +65,17 @@ class PortalViewClass extends Component {
     };
 
     const ARSCENE = () => (
-      <ViroARScene>
+      <ViroARScene
+        onAnchorFound={() => {
+          console.log('found anchor');
+          this.setState({portalVisible: true});
+        }}>
         <ViroAmbientLight color="#fff" />
         <ViroPortalScene passable={true}>
-          <ViroPortal position={[0, 0, -1]} scale={[0.2, 0.2, 0.2]}>
+          <ViroPortal
+            visible={this.state.portalVisible}
+            position={[0, 0, -1]}
+            scale={[0.2, 0.2, 0.2]}>
             <Viro3DObject
               source={require('../models/ViroPortal/portal_archway.vrx')}
               resources={[

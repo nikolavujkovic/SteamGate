@@ -166,7 +166,7 @@ export default {
       modelImage: require('../assets/modelPreviews/botany/tratincicaP.png'),
       modelType: 'GLTF',
       modelScale: 0.005,
-      shadowVisible: false,
+      shadowVisible: true,
       onGround: true,
       modelSource: require('../models/botany/model1/tratincica/a_tratincica.gltf'),
       modelResourcesArr: [
@@ -181,7 +181,7 @@ export default {
       modelImage: require('../assets/modelPreviews/botany/anturijumP.png'),
       modelType: 'GLTF',
       modelScale: 0.15,
-      shadowVisible: false,
+      shadowVisible: true,
       onGround: true,
       modelSource: require('../models/botany/model2/flamingov_cvijet-anturijum/a_anturijum.gltf'),
       modelResourcesArr: [
@@ -198,7 +198,7 @@ export default {
       modelImage: require('../assets/modelPreviews/botany/mimozaP.png'),
       modelType: 'GLTF',
       modelScale: 0.3,
-      shadowVisible: false,
+      shadowVisible: true,
       onGround: true,
       modelSource: require('../models/botany/model3/mimoza/a_mimoza.gltf'),
       modelResourcesArr: [
@@ -404,7 +404,7 @@ export default {
       modelImage: require('../assets/modelPreviews/mycology/muharaP.png'),
       modelType: 'GLTF',
       modelScale: 0.0015,
-      shadowVisible: false,
+      shadowVisible: true,
       onGround: true,
       modelSource: require('../models/mycology/model1/muhara/a_muhara.gltf'),
       modelResourcesArr: [
@@ -445,7 +445,7 @@ export default {
       modelImage: require('../assets/modelPreviews/mycology/suncanicaP.png'),
       modelType: 'GLTF',
       modelScale: 0.0003,
-      shadowVisible: false,
+      shadowVisible: true,
       onGround: true,
       modelSource: require('../models/mycology/model3/suncanica/a_suncanica.gltf'),
       modelResourcesArr: [
@@ -461,7 +461,7 @@ export default {
       modelImage: require('../assets/modelPreviews/mycology/brezovdedP.png'),
       modelType: 'GLTF',
       modelScale: 0.3,
-      shadowVisible: false,
+      shadowVisible: true,
       onGround: true,
       modelSource: require('../models/mycology/model4/brezov_ded/a_brezovded.gltf'),
       modelResourcesArr: [
@@ -568,7 +568,7 @@ export default {
       modelImage: require('../assets/modelPreviews/zoology/tvorP.png'),
       modelType: 'GLTF',
       modelScale: 0.12,
-      shadowVisible: false,
+      shadowVisible: true,
       onGround: true,
       modelSource: require('../models/zoology/model2/tvor/a_tvor.gltf'),
       modelResourcesArr: [
@@ -602,7 +602,7 @@ export default {
       modelImage: require('../assets/modelPreviews/zoology/komaracP.png'),
       modelType: 'GLTF',
       modelScale: 0.05,
-      shadowVisible: false,
+      shadowVisible: true,
       onGround: true, // hocemo li prikazivati na stolu ili stojeci
       modelSource: require('../models/zoology/model4/komarac/a_komarac.gltf'),
       modelResourcesArr: [
@@ -635,7 +635,7 @@ export default {
       modelImage: require('../assets/modelPreviews/zoology/puzP.png'),
       modelType: 'GLTF',
       modelScale: 0.1,
-      shadowVisible: false,
+      shadowVisible: true,
       onGround: true,
       modelSource: require('../models/zoology/model6/livadski_puz/a_puz.gltf'),
       modelResourcesArr: [
@@ -652,7 +652,7 @@ export default {
       modelImage: require('../assets/modelPreviews/zoology/tigarP.png'),
       modelType: 'VRX',
       modelScale: 0.006,
-      shadowVisible: false,
+      shadowVisible: true,
       onGround: true,
       modelSource: require('../models/zoology/model7/tigar/tiger.vrx'),
       modelResourcesArr: [
