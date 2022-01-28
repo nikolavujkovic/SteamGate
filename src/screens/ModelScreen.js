@@ -43,6 +43,7 @@ export default function ModelScreen({navigation, route}) {
   };
 
   const arr = modelText.split(' ');
+
   const reducer = (acc, cur, index) => {
     let previousVal = acc[acc.length - 1];
     if (

@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   listStyle: {
     paddingTop: 10 + 80,
     flexGrow: 1,
-    paddingBottom: 160, // this is because of the bottom tabs navigator
+    paddingBottom: 175, // this is because of the bottom tabs navigator
   },
 });
 

@@ -18,6 +18,7 @@ import {
 import Icons from '../constants/Icons';
 import deckConstants from '../constants/deckConstants';
 import modelConstants from '../constants/modelConstants';
+import subjectConstants from '../constants/subjectConstants';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeckLoading from '../components/DeckLoading';
@@ -36,6 +37,11 @@ class DeckView extends Component {
     ready: false,
     selectedAstro: Math.floor(Math.random() * 3),
     fadeAnim: new Animated.Value(1),
+    selectedAnimationId: 0,
+
+    specialAnimationRunning: false,
+    specialAnimations: null,
+    specialAnimationName: '',
   };
 
   backAction = () => {
@@ -91,6 +97,11 @@ class DeckView extends Component {
     }
   };
 
+  addSpecialAnimations = (subjectId, modelId) => {
+    const spec = modelConstants[subjectId][modelId].specialAnimations;
+    return spec;
+  };
+
   arRender = () => {
     let selectedDeck = JSON.parse(JSON.stringify(deckConstants.playingCards));
 
@@ -107,6 +118,18 @@ class DeckView extends Component {
         modelScale: modelConstants[subjectId][modelId].modelScale,
         modelType: modelConstants[subjectId][modelId].modelType,
         modelTitle: modelConstants[subjectId][modelId].modelTitle,
+        scaleDivider: modelConstants[subjectId][modelId].scaleDivider,
+        animationName: modelConstants[subjectId][modelId].animationName,
+        onGround: modelConstants[subjectId][modelId].onGround,
+        rotationArray: modelConstants[subjectId][modelId].modelRotationArray,
+        positionArray: modelConstants[subjectId][modelId].cardPositionArray
+          ? modelConstants[subjectId][modelId].cardPositionArray
+          : modelConstants[subjectId][modelId].modelPositionArray
+          ? modelConstants[subjectId][modelId].modelPositionArray
+          : [0, 0, 0],
+        specialAnimations: modelConstants[subjectId][modelId].specialAnimations
+          ? this.addSpecialAnimations(subjectId, modelId)
+          : null,
       };
     };
 
@@ -128,8 +151,11 @@ class DeckView extends Component {
 
         this.setState({
           ARSCENEchildren: markerArr.map((item, index) => {
-            console.log('test');
+            console.log('item', item);
             const scaleDivider = item.scaleDivider ? item.scaleDivider : 1;
+            let newPositionArray = [...item.positionArray];
+            newPositionArray[1] = newPositionArray[1] + 0.05;
+
             if (
               item != null
               // && //THIS MAY IMPROVE PERFORMANCE SO ITS JUST A "just-in-case feature"
@@ -154,10 +180,18 @@ class DeckView extends Component {
                             ],
                           },
                     );
-                    this.setState({onlyVisible: item.modelTarget});
+
+                    if (item.specialAnimations)
+                      this.setState({
+                        specialAnimations: item.specialAnimations,
+                      });
+
+                    // this.setState({onlyVisible: item.modelTarget});
                   }}>
                   <Viro3DObject
-                    position={[0, 0, 0]}
+                    position={
+                      item.onGround ? item.positionArray : newPositionArray
+                    }
                     source={item.modelSource}
                     resources={item.modelResourcesArr}
                     scale={[
@@ -166,6 +200,32 @@ class DeckView extends Component {
                       item.modelScale / scaleDivider,
                     ]}
                     type={item.modelType}
+                    rotation={item.rotationArray}
+                    animation={
+                      item.animationName
+                        ? {
+                            name: this.state.specialAnimationRunning
+                              ? this.state.specialAnimationName
+                              : item.animationName[
+                                  this.state.selectedAnimationId
+                                ],
+                            run: true,
+                            loop: true,
+                            onFinish: () => {
+                              this.setState({
+                                specialAnimationRunning: false,
+                                specialAnimationName: '',
+                                selectedAnimationId:
+                                  this.state.selectedAnimationId + 1 >
+                                  item.animationName.length - 1
+                                    ? 0
+                                    : this.state.selectedAnimationId + 1,
+                              });
+                              this.arRender();
+                            },
+                          }
+                        : null
+                    }
                   />
                 </ViroARImageMarker>
               );
@@ -283,6 +343,42 @@ class DeckView extends Component {
           </View>
         )}
 
+        {this.state.specialAnimations && (
+          <View style={styles.functionButtonsContainer}>
+            {this.state.specialAnimations.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                activeOpacity={0.7}
+                onPress={() => {
+                  this.setState({
+                    specialAnimationRunning: true,
+                    specialAnimationName: item.name,
+                  });
+                  this.arRender();
+                }}
+                style={[
+                  styles.functionButton,
+                  {
+                    backgroundColor:
+                      this.state.specialAnimationName === item.name
+                        ? '#462D8C'
+                        : 'white',
+                  },
+                ]}>
+                <Icons.MaterialCommunityIcons
+                  name={item.icon}
+                  size={28}
+                  color={
+                    this.state.specialAnimationName === item.name
+                      ? 'white'
+                      : 'black'
+                  }
+                />
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
+
         {!this.state.ready && (
           <Animated.View
             style={{
@@ -310,6 +406,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 16,
     fontFamily: 'Sen-Regular',
+    marginHorizontal: 20,
   },
   backButton: {
     borderRadius: 100,
@@ -356,6 +453,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#cccccc80',
     borderRadius: 20,
     padding: 7.5,
+  },
+
+  functionButtonsContainer: {
+    position: 'absolute',
+    right: 16,
+    height: '100%',
+    justifyContent: 'center',
+  },
+  functionButton: {
+    borderRadius: 100,
+    padding: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 16,
   },
 });
 

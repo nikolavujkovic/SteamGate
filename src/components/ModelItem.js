@@ -41,7 +41,7 @@ const ModelItem = ({backgroundCardColor, subjectId, itemData, index}) => {
 
 const styles = StyleSheet.create({
   itemStyle: {
-    height: windowHeight * 0.32,
+    height: windowHeight * 0.31,
     // width: windowWidth * 0.42,
     flex: 1,
     backgroundColor: '#F16A7D',
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   itemText: {
-    flex: 0.25,
+    flex: 0.265,
     fontSize: 22,
     textAlignVertical: 'center',
     fontFamily: 'Sen-Bold',

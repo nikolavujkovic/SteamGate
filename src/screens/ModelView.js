@@ -15,9 +15,11 @@ import {
   ViroQuad,
   Viro3DObject,
   ViroARPlane,
+  ViroAnimations,
 } from '@viro-community/react-viro';
 import Icons from '../constants/Icons';
 import modelConstants from '../constants/modelConstants';
+import subjectConstants from '../constants/subjectConstants';
 
 class ModelView extends Component {
   //FIXME: MODEL RESOURCES CANT BE OF THE SAME NAME
@@ -28,6 +30,10 @@ class ModelView extends Component {
   state = {
     shouldHide: false,
     backAllowed: false,
+    selectedAnimationId: 0,
+    specialAnimationRunning: false,
+    specialAnimationName: '',
+    runAnimation: true,
   };
 
   backAction = () => {
@@ -66,6 +72,8 @@ class ModelView extends Component {
       modelPositionArray,
       modelRotationArray,
       modelTitle,
+      animationName,
+      specialAnimations,
     } = {
       shadowVisible: modelConstants[SID][MID].shadowVisible,
       onGround: modelConstants[SID][MID].onGround,
@@ -80,12 +88,18 @@ class ModelView extends Component {
         ? modelConstants[SID][MID].modelRotationArray
         : [0, 0, 0],
       modelTitle: modelConstants[SID][MID].modelTitle,
+      animationName: modelConstants[SID][MID].animationName
+        ? modelConstants[SID][MID].animationName
+        : null,
+      specialAnimations: modelConstants[SID][MID].specialAnimations
+        ? modelConstants[SID][MID].specialAnimations
+        : null,
     };
 
     const GroundComponent = props => {
       if (onGround) {
         return (
-          <ViroARPlane minHeight={0.5} minWidth={0.5} alignment={'Horizontal'}>
+          <ViroARPlane minHeight={1} minWidth={1} alignment={'Horizontal'}>
             {props.children}
           </ViroARPlane>
         );
@@ -121,7 +135,27 @@ class ModelView extends Component {
             resources={modelResourcesArr}
             scale={[modelScale, modelScale, modelScale]}
             type={modelType}
-            // animation={{name: 'Take 001', run: true, loop: true, delay: 0}}
+            animation={
+              animationName
+                ? {
+                    name: this.state.specialAnimationRunning
+                      ? this.state.specialAnimationName
+                      : animationName[this.state.selectedAnimationId],
+                    run: true,
+                    loop: true,
+                    onFinish: () =>
+                      this.setState({
+                        specialAnimationRunning: false,
+                        specialAnimationName: '',
+                        selectedAnimationId:
+                          this.state.selectedAnimationId + 1 >
+                          animationName.length - 1
+                            ? 0
+                            : this.state.selectedAnimationId + 1,
+                      }),
+                  }
+                : null
+            }
           />
 
           {shadowVisible && (
@@ -147,6 +181,41 @@ class ModelView extends Component {
           <Icons.AntDesign name="arrowleft" size={16} color="black" />
           <Text style={styles.backButtonText}>Nazad</Text>
         </TouchableOpacity>
+
+        {specialAnimations && (
+          <View style={styles.functionButtonsContainer}>
+            {specialAnimations.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                activeOpacity={0.7}
+                onPress={() => {
+                  this.setState({
+                    specialAnimationRunning: true,
+                    specialAnimationName: item.name,
+                  });
+                }}
+                style={[
+                  styles.functionButton,
+                  {
+                    backgroundColor:
+                      this.state.specialAnimationName === item.name
+                        ? subjectConstants[SID].themeColor
+                        : 'white',
+                  },
+                ]}>
+                <Icons.MaterialCommunityIcons
+                  name={item.icon}
+                  size={28}
+                  color={
+                    this.state.specialAnimationName === item.name
+                      ? 'white'
+                      : 'black'
+                  }
+                />
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
       </>
     );
   }
@@ -180,6 +249,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginLeft: 5,
     fontFamily: 'Sen-Regular',
+  },
+
+  functionButtonsContainer: {
+    position: 'absolute',
+    right: 16,
+    height: '100%',
+    justifyContent: 'center',
+  },
+  functionButton: {
+    borderRadius: 100,
+    padding: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 16,
   },
 });
 
