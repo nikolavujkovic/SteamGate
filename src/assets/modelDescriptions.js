@@ -51,7 +51,7 @@ Ima **četiri DIMM otvora** i može se nadograditi do **64 GB** DDR4 memorije. Z
 Z170-P ima Gigabit LAN, četiri SATA3 veze, jednu M.2 vezu i sedam USB 3.0 priključaka.`,
 
     `**RAM** je oblik **primarne računarske memorije** čijem se sadržaju može **izravno pristupiti,** za razliku od sekvencijskih memorijskih uređaja kao što su magnetne vrpce, CD i DVD diskovi te tvrdi diskovi, u kojima pristup određenom sadržaju zavisi od **položaja čitača.**
-RAM omogućuje **upisivanje i čitanje podataka,** za razliku od ROM-a, iz kojeg se podaci mogu samo čitati. U **RAM** se upisuju **aktivni program te informacije potrebne za trenutni rad računara.
+RAM omogućuje **upisivanje i čitanje podataka,** za razliku od ROM-a, iz kojeg se podaci mogu samo čitati. U **RAM** se upisuju **aktivni program** te informacije potrebne za **trenutni rad** računara.
 Ima mnogo veću memoriju od ROM-a.`,
 
     `**Pentium Pro** je šesta generacija x86 **mikroprocesora** koji je razvio i proizveo **Intel** i predstavljen je 1. novembra 1995. godine. 
