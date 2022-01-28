@@ -575,7 +575,7 @@ export default {
         require('../models/zoology/model2/tvor/tvor.bin'),
         require('../models/zoology/model2/tvor/material_baseColor.png'),
       ],
-      modelRotationArray: [0, -60, 0],
+      modelRotationArray: [0, -90, 0],
       scaleDivider: 13,
     },
     {
@@ -667,6 +667,7 @@ export default {
         {name: 'Idle_Lie Prone', icon: 'sleep'},
       ],
       scaleDivider: 9,
+      extraLight: true,
     },
   ],
 };

@@ -7,6 +7,7 @@ export default function DeckLoading({selected}) {
     require('../assets/other/astroLoad1.png'),
     require('../assets/other/astroLoad2.png'),
     require('../assets/other/astroLoad3.png'),
+    require('../assets/other/astroLoad4.png'),
   ];
 
   return (

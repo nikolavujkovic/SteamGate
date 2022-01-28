@@ -18,7 +18,6 @@ import {
 import Icons from '../constants/Icons';
 import deckConstants from '../constants/deckConstants';
 import modelConstants from '../constants/modelConstants';
-import subjectConstants from '../constants/subjectConstants';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeckLoading from '../components/DeckLoading';
@@ -35,9 +34,11 @@ class DeckView extends Component {
     backAllowed: false,
     ARSCENE: null,
     ready: false,
-    selectedAstro: Math.floor(Math.random() * 3),
+    selectedAstro:
+      Math.floor(Math.random() * 23) === 22 ? 3 : Math.floor(Math.random() * 3),
     fadeAnim: new Animated.Value(1),
     selectedAnimationId: 0,
+    markerArrayState: [],
 
     specialAnimationRunning: false,
     specialAnimations: null,
@@ -66,7 +67,10 @@ class DeckView extends Component {
       foundModelTitle: initText,
       ready: false,
       backAllowed: false,
-      selectedAstro: Math.floor(Math.random() * 3),
+      selectedAstro:
+        Math.floor(Math.random() * 23) === 22
+          ? 3
+          : Math.floor(Math.random() * 3),
       fadeAnim: new Animated.Value(1),
     });
 
@@ -100,6 +104,112 @@ class DeckView extends Component {
   addSpecialAnimations = (subjectId, modelId) => {
     const spec = modelConstants[subjectId][modelId].specialAnimations;
     return spec;
+  };
+
+  setArState = markerArr => {
+    this.setState({anyCardsAssigned: markerArr.length > 0 ? true : false});
+
+    this.setState({
+      ARSCENEchildren: markerArr.map((item, index) => {
+        console.log('item', item);
+        const scaleDivider = item.scaleDivider ? item.scaleDivider : 1;
+        let newPositionArray = [...item.positionArray];
+        newPositionArray[1] = newPositionArray[1] + 0.05;
+
+        if (
+          item != null
+          // && //THIS MAY IMPROVE PERFORMANCE SO ITS JUST A "just-in-case feature"
+          // (item.modelTarget == this.state.onlyVisible ||
+          //   this.state.onlyVisible == null)
+        ) {
+          return (
+            <ViroARImageMarker
+              key={index}
+              target={item.modelTarget}
+              onAnchorFound={() => {
+                console.log('ANCHOR FOUND BBY');
+                this.setState(
+                  this.state.foundModelTitle === initText
+                    ? {foundModelTitle: [item.modelTitle]}
+                    : {
+                        foundModelTitle: [
+                          ...new Set([
+                            ...this.state.foundModelTitle,
+                            item.modelTitle,
+                          ]),
+                        ],
+                      },
+                );
+
+                if (item.specialAnimations)
+                  this.setState({
+                    specialAnimations: item.specialAnimations,
+                  });
+
+                // this.setState({onlyVisible: item.modelTarget});
+              }}>
+              <Viro3DObject
+                position={item.onGround ? item.positionArray : newPositionArray}
+                source={item.modelSource}
+                resources={item.modelResourcesArr}
+                scale={[
+                  item.modelScale / scaleDivider,
+                  item.modelScale / scaleDivider,
+                  item.modelScale / scaleDivider,
+                ]}
+                type={item.modelType}
+                rotation={item.rotationArray}
+                animation={
+                  item.animationName
+                    ? {
+                        name: this.state.specialAnimationRunning
+                          ? this.state.specialAnimationName
+                          : item.animationName[this.state.selectedAnimationId],
+                        run: true,
+                        loop: true,
+                        onFinish: () => {
+                          this.setState(
+                            {
+                              specialAnimationRunning: false,
+                              specialAnimationName: '',
+                              selectedAnimationId:
+                                this.state.selectedAnimationId + 1 >
+                                item.animationName.length - 1
+                                  ? 0
+                                  : this.state.selectedAnimationId + 1,
+                            },
+                            () => {
+                              let clonedArray = JSON.parse(
+                                JSON.stringify(this.state.markerArrayState),
+                              );
+                              console.log('CLONED MARKER STATE:', clonedArray);
+                              this.setArState(clonedArray); // more performace efficient way);
+                            },
+
+                            // this.arRender();
+                          );
+                        },
+                      }
+                    : null
+                }
+              />
+            </ViroARImageMarker>
+          );
+        }
+      }),
+    });
+
+    const newARSCENE = () => (
+      <ViroARScene>
+        <ViroAmbientLight color="#ffffff" />
+        {this.state.ARSCENEchildren}
+      </ViroARScene>
+    );
+    this.setState({
+      ARSCENE: (
+        <ViroARSceneNavigator autofocus initialScene={{scene: newARSCENE}} />
+      ),
+    });
   };
 
   arRender = () => {
@@ -149,105 +259,10 @@ class DeckView extends Component {
         console.log(`User has assigned ${markerArr.length} cards.`);
         console.log('Triggered marker:', this.state.onlyVisible);
 
-        this.setState({
-          ARSCENEchildren: markerArr.map((item, index) => {
-            console.log('item', item);
-            const scaleDivider = item.scaleDivider ? item.scaleDivider : 1;
-            let newPositionArray = [...item.positionArray];
-            newPositionArray[1] = newPositionArray[1] + 0.05;
-
-            if (
-              item != null
-              // && //THIS MAY IMPROVE PERFORMANCE SO ITS JUST A "just-in-case feature"
-              // (item.modelTarget == this.state.onlyVisible ||
-              //   this.state.onlyVisible == null)
-            ) {
-              return (
-                <ViroARImageMarker
-                  key={index}
-                  target={item.modelTarget}
-                  onAnchorFound={() => {
-                    console.log('ANCHOR FOUND BBY');
-                    this.setState(
-                      this.state.foundModelTitle === initText
-                        ? {foundModelTitle: [item.modelTitle]}
-                        : {
-                            foundModelTitle: [
-                              ...new Set([
-                                ...this.state.foundModelTitle,
-                                item.modelTitle,
-                              ]),
-                            ],
-                          },
-                    );
-
-                    if (item.specialAnimations)
-                      this.setState({
-                        specialAnimations: item.specialAnimations,
-                      });
-
-                    // this.setState({onlyVisible: item.modelTarget});
-                  }}>
-                  <Viro3DObject
-                    position={
-                      item.onGround ? item.positionArray : newPositionArray
-                    }
-                    source={item.modelSource}
-                    resources={item.modelResourcesArr}
-                    scale={[
-                      item.modelScale / scaleDivider,
-                      item.modelScale / scaleDivider,
-                      item.modelScale / scaleDivider,
-                    ]}
-                    type={item.modelType}
-                    rotation={item.rotationArray}
-                    animation={
-                      item.animationName
-                        ? {
-                            name: this.state.specialAnimationRunning
-                              ? this.state.specialAnimationName
-                              : item.animationName[
-                                  this.state.selectedAnimationId
-                                ],
-                            run: true,
-                            loop: true,
-                            onFinish: () => {
-                              this.setState({
-                                specialAnimationRunning: false,
-                                specialAnimationName: '',
-                                selectedAnimationId:
-                                  this.state.selectedAnimationId + 1 >
-                                  item.animationName.length - 1
-                                    ? 0
-                                    : this.state.selectedAnimationId + 1,
-                              });
-                              this.arRender();
-                            },
-                          }
-                        : null
-                    }
-                  />
-                </ViroARImageMarker>
-              );
-            }
-          }),
-        });
+        this.setState({markerArrayState: markerArr});
+        this.setArState(markerArr);
 
         console.log('ARSCENEchildren:', this.state.ARSCENEchildren);
-        const newARSCENE = () => (
-          <ViroARScene>
-            <ViroAmbientLight color="#ffffff" />
-            {this.state.ARSCENEchildren}
-          </ViroARScene>
-        );
-        this.setState({
-          ARSCENE: (
-            <ViroARSceneNavigator
-              autofocus
-              initialScene={{scene: newARSCENE}}
-            />
-          ),
-        });
       })
       .catch(e => {
         console.warn(e);
@@ -281,7 +296,7 @@ class DeckView extends Component {
   }
 
   render() {
-    const logArray = ['pizzaaaa', 'soupppp', 'buuuurger'];
+    const logArray = ['pizzaaaa', 'soupppp', 'buuuurger', 'SUSHIIII'];
     console.log(logArray[this.state.selectedAstro]);
     //// AR stuff onwards
 
@@ -350,11 +365,21 @@ class DeckView extends Component {
                 key={index}
                 activeOpacity={0.7}
                 onPress={() => {
-                  this.setState({
-                    specialAnimationRunning: true,
-                    specialAnimationName: item.name,
-                  });
-                  this.arRender();
+                  this.setState(
+                    {
+                      specialAnimationRunning: true,
+                      specialAnimationName: item.name,
+                    },
+                    () => {
+                      let clonedArray = JSON.parse(
+                        JSON.stringify(this.state.markerArrayState),
+                      );
+                      console.log('CLONED MARKER STATE:', clonedArray);
+                      this.setArState(clonedArray); // more performace efficient way);
+                    },
+                  );
+
+                  // this.arRender();
                 }}
                 style={[
                   styles.functionButton,

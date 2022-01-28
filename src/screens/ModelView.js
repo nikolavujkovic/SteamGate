@@ -72,6 +72,7 @@ class ModelView extends Component {
       modelTitle,
       animationName,
       specialAnimations,
+      extraLight,
     } = {
       shadowVisible: modelConstants[SID][MID].shadowVisible,
       onGround: modelConstants[SID][MID].onGround,
@@ -81,7 +82,7 @@ class ModelView extends Component {
       modelResourcesArr: modelConstants[SID][MID].modelResourcesArr,
       modelPositionArray: modelConstants[SID][MID].modelPositionArray
         ? modelConstants[SID][MID].modelPositionArray
-        : [0, 0, 0],
+        : [0, 0, -0.5],
       modelRotationArray: modelConstants[SID][MID].modelRotationArray
         ? modelConstants[SID][MID].modelRotationArray
         : [0, 0, 0],
@@ -92,12 +93,15 @@ class ModelView extends Component {
       specialAnimations: modelConstants[SID][MID].specialAnimations
         ? modelConstants[SID][MID].specialAnimations
         : null,
+      extraLight: modelConstants[SID][MID].extraLight
+        ? modelConstants[SID][MID].extraLight
+        : false,
     };
 
     let spotlightPositionArray = [...modelPositionArray];
-    spotlightPositionArray[0] -= 1;
+    spotlightPositionArray[0] -= 2;
     spotlightPositionArray[1] += 3;
-    spotlightPositionArray[2] += 0.5;
+    spotlightPositionArray[2] += 3;
 
     const GroundComponent = props => {
       if (onGround) {
@@ -127,12 +131,15 @@ class ModelView extends Component {
               shadowMapSize={2048}
               shadowNearZ={2}
               shadowFarZ={5}
-              shadowOpacity={0.2}
-              intensity={100}
+              shadowOpacity={extraLight ? 0.75 : 0.2}
+              intensity={extraLight ? 2000 : 100}
             />
           )}
 
-          {!shadowVisible && <ViroAmbientLight color="#fff" />}
+          <ViroAmbientLight
+            color="#fff"
+            intensity={shadowVisible ? (extraLight ? 700 : 75) : 1000}
+          />
 
           <Viro3DObject
             visible={this.state.modelVisible}
