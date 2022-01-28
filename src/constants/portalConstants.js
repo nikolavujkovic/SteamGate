@@ -1,28 +1,33 @@
 export default {
   space: {
-    portalTitle: 'Put kroz svemir',
-    portalSource: require('../videos/space.mp4'),
+    portalTitle: 'Tragom astronauta - istražite\nMeđunarodnu Svemirsku Stanicu',
+    portalSource: require('../videos/ISS360.mp4'),
+    portalBackground: require('../assets/backgroundImages/PortalsBackgrounds/space.png'),
     portalId: 'space',
   },
   bloodflow: {
-    portalTitle: 'Mikrosvijet covjeka',
-    portalSource: require('../videos/bloodflow.mp4'),
-    portalId: 'bloodflow',
+    portalTitle: 'Zakoračite na Mars i upoznajte\nkrajolik Crvene planete',
+    portalSource: require('../videos/Mars360.mp4'),
+    portalBackground: require('../assets/backgroundImages/PortalsBackgrounds/mars.png'),
+    portalId: 'mars',
   },
   lions: {
-    portalTitle: 'Susret sa lavovima',
-    portalSource: require('../videos/lions.mp4'),
+    portalTitle: 'Bliski susret sa lavovima\n- igra sa kraljem životinja -',
+    portalSource: require('../videos/Lions360.mp4'),
+    portalBackground: require('../assets/backgroundImages/PortalsBackgrounds/savannah.png'),
     portalId: 'lions',
   },
   asteroid: {
-    portalTitle: 'Napad asteroida',
-    portalSource: require('../videos/asteroid.mp4'),
-    portalId: 'asteroid',
+    portalTitle: 'Zaronite na živopisno dno\nkoralnog grebena',
+    portalSource: require('../videos/CoralReef360.mp4'),
+    portalBackground: require('../assets/backgroundImages/PortalsBackgrounds/ocean.png'),
+    portalId: 'ocean',
   },
   underwater: {
-    portalTitle: 'Okeanske dubine',
-    portalSource: require('../videos/underwater.mp4'),
-    portalId: 'underwater',
+    portalTitle: 'Zavirite u ljudsko tijelo\niz nove perspektive',
+    portalSource: require('../videos/Bloodflow360.mp4'),
+    portalBackground: require('../assets/backgroundImages/PortalsBackgrounds/blood-flow.png'),
+    portalId: 'bloodflow',
   },
 };
 

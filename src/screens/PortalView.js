@@ -53,7 +53,7 @@ class PortalViewClass extends Component {
     const {portalTitle, portalVideoSource} = {
       // ...props,
       portalTitle: 'Neki kul video svemira',
-      portalVideoSource: require('../videos/sub.mp4'),
+      portalVideoSource: require('../videos/ISS360.mp4'),
     };
 
     const toggleVideoPlayback = () => {
