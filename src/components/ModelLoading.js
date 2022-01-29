@@ -2,25 +2,17 @@ import {View, Text, StyleSheet, ActivityIndicator, Image} from 'react-native';
 import React from 'react';
 import FastImage from 'react-native-fast-image';
 
-export default function DeckLoading({selected}) {
+export default function ModelLoading({selected}) {
   const astros = [
-    require('../assets/other/deck/astroLoad1.png'),
-    require('../assets/other/deck/astroLoad2.png'),
-    require('../assets/other/deck/astroLoad3.png'),
-    require('../assets/other/deck/coffeeExpress.png'),
+    require('../assets/other/portal/astroLoad1P.png'),
+    require('../assets/other/portal/astroLoad2P.png'),
+    require('../assets/other/portal/astroLoad3P.png'),
   ];
 
   return (
     <View style={styles.container}>
-      <Image
-        fadeDuration={300}
-        source={astros[selected]}
-        style={styles.astro}
-      />
-      <Text style={styles.text}>
-        Konzumiranje memorije i performansi u toku...{' '}
-        <Text style={{fontFamily: 'JosefinSans-SemiBold'}}>:)</Text>
-      </Text>
+      <Image source={astros[selected]} style={styles.astro} />
+      <Text style={styles.text}>3D model se priprema...</Text>
 
       <ActivityIndicator size={60} color="#462D8C" />
     </View>

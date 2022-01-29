@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   BackHandler,
+  Animated,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {
@@ -15,8 +16,12 @@ import {
   ViroPortalScene,
   Viro360Video,
   ViroAmbientLight,
+  ViroConstants,
 } from '@viro-community/react-viro';
 import Icons from '../constants/Icons';
+import PortalLoading from '../components/PortalLoading';
+
+const initText = 'Pomjerajte polako Vaš uređaj...';
 
 class PortalViewClass extends Component {
   state = {
@@ -25,7 +30,18 @@ class PortalViewClass extends Component {
     shouldHide: false,
     backAllowed: false,
     portalVisible: false,
-    // navigation: this.props.navigation,
+    titleText: initText,
+    ready: false,
+    fadeAnim: new Animated.Value(1),
+    selectedAstro: Math.floor(Math.random() * 3),
+  };
+
+  fadeOut = () => {
+    Animated.timing(this.state.fadeAnim, {
+      toValue: 0,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
   };
 
   backAction = () => {
@@ -43,6 +59,10 @@ class PortalViewClass extends Component {
 
     setTimeout(() => {
       this.setState({backAllowed: true});
+      this.fadeOut();
+    }, 1500);
+    setTimeout(() => {
+      this.setState({ready: true});
     }, 2000);
   }
 
@@ -66,9 +86,11 @@ class PortalViewClass extends Component {
 
     const ARSCENE = () => (
       <ViroARScene
-        onAnchorFound={() => {
-          console.log('found anchor');
-          this.setState({portalVisible: true});
+        onTrackingUpdated={t => {
+          console.log('t', t);
+          t === ViroConstants.TRACKING_UNAVAILABLE
+            ? this.setState({titleText: initText, portalVisible: false})
+            : this.setState({titleText: portalTitle, portalVisible: true});
         }}>
         <ViroAmbientLight color="#fff" />
         <ViroPortalScene passable={true}>
@@ -102,7 +124,7 @@ class PortalViewClass extends Component {
     return this.state.shouldHide ? null : (
       <>
         <ViroARSceneNavigator autofocus initialScene={{scene: ARSCENE}} />
-        <Text style={styles.title}>{portalTitle}</Text>
+        <Text style={styles.title}>{this.state.titleText}</Text>
         <TouchableOpacity
           activeOpacity={0.9}
           onPress={() => this.backAction()}
@@ -133,6 +155,18 @@ class PortalViewClass extends Component {
             />
           </TouchableOpacity>
         </View>
+
+        {!this.state.ready && (
+          <Animated.View
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              opacity: this.state.fadeAnim,
+            }}>
+            <PortalLoading selected={this.state.selectedAstro} />
+          </Animated.View>
+        )}
       </>
     );
   }

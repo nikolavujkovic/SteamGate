@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   appLogo: {
-    width: '40%',
+    width: '45%',
     height: undefined,
     aspectRatio: 0.8255,
   },

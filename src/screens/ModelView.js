@@ -5,6 +5,7 @@ import {
   BackHandler,
   StyleSheet,
   TouchableOpacity,
+  Animated,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {
@@ -16,10 +17,14 @@ import {
   Viro3DObject,
   ViroARPlane,
   ViroMaterials,
+  ViroConstants,
 } from '@viro-community/react-viro';
 import Icons from '../constants/Icons';
 import modelConstants from '../constants/modelConstants';
 import subjectConstants from '../constants/subjectConstants';
+import ModelLoading from '../components/ModelLoading';
+
+const initText = 'Pomjerajte polako Vaš uređaj...';
 
 class ModelView extends Component {
   // fix shadow
@@ -32,6 +37,10 @@ class ModelView extends Component {
     specialAnimationName: '',
     runAnimation: true,
     modelVisible: false,
+    titleText: initText,
+    ready: false,
+    fadeAnim: new Animated.Value(1),
+    selectedAstro: Math.floor(Math.random() * 3),
   };
 
   backAction = () => {
@@ -39,6 +48,14 @@ class ModelView extends Component {
     this.setState({shouldHide: true});
     this.props.navigation.goBack();
     return true;
+  };
+
+  fadeOut = () => {
+    Animated.timing(this.state.fadeAnim, {
+      toValue: 0,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
   };
 
   componentDidMount() {
@@ -49,6 +66,10 @@ class ModelView extends Component {
 
     setTimeout(() => {
       this.setState({backAllowed: true});
+      this.fadeOut();
+    }, 1500);
+    setTimeout(() => {
+      this.setState({ready: true});
     }, 2000);
   }
 
@@ -115,9 +136,11 @@ class ModelView extends Component {
 
     const ARSCENE = () => (
       <ViroARScene
-        onAnchorFound={() => {
-          console.log('andhor found...');
-          this.setState({modelVisible: true});
+        onTrackingUpdated={t => {
+          console.log('t', t);
+          t === ViroConstants.TRACKING_UNAVAILABLE
+            ? this.setState({titleText: initText, modelVisible: false})
+            : this.setState({titleText: modelTitle, modelVisible: true});
         }}>
         <GroundComponent>
           {shadowVisible && (
@@ -187,7 +210,7 @@ class ModelView extends Component {
     return this.state.shouldHide ? null : (
       <>
         <ViroARSceneNavigator autofocus initialScene={{scene: ARSCENE}} />
-        <Text style={styles.title}>{modelTitle}</Text>
+        <Text style={styles.title}>{this.state.titleText}</Text>
         <TouchableOpacity
           activeOpacity={0.9}
           onPress={() => this.backAction()}
@@ -230,6 +253,18 @@ class ModelView extends Component {
             ))}
           </View>
         )}
+
+        {!this.state.ready && (
+          <Animated.View
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              opacity: this.state.fadeAnim,
+            }}>
+            <ModelLoading selected={this.state.selectedAstro} />
+          </Animated.View>
+        )}
       </>
     );
   }
@@ -246,6 +281,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 16,
     fontFamily: 'Sen-Regular',
+    textAlign: 'center',
   },
   backButton: {
     position: 'absolute',
