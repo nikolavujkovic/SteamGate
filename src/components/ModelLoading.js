@@ -4,9 +4,9 @@ import FastImage from 'react-native-fast-image';
 
 export default function ModelLoading({selected}) {
   const astros = [
-    require('../assets/other/portal/astroLoad1P.png'),
-    require('../assets/other/portal/astroLoad2P.png'),
-    require('../assets/other/portal/astroLoad3P.png'),
+    require('../assets/other/model/astroLoad1M.png'),
+    require('../assets/other/model/astroLoad2M.png'),
+    require('../assets/other/model/astroLoad3M.png'),
   ];
 
   return (

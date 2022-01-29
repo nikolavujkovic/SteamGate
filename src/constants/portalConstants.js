@@ -1,28 +1,45 @@
 export default {
   space: {
-    portalTitle: 'Put kroz svemir',
-    portalSource: require('../videos/space.mp4'),
+    portalTitle:
+      '**Tragom astronauta**\nIstražite Međunarodnu Svemirsku Stanicu!',
+    portalName: 'Tragom astronauta',
+    portalSource: require('../videos/ISS360.mp4'),
+    portalBackground: require('../assets/backgroundImages/PortalsBackgrounds/space.png'),
+    themeColor: '#280f69',
     portalId: 'space',
   },
-  bloodflow: {
-    portalTitle: 'Mikrosvijet covjeka',
-    portalSource: require('../videos/bloodflow.mp4'),
-    portalId: 'bloodflow',
+  mars: {
+    portalTitle: '**Zakoračite na Mars**\nUpoznajte krajolik Crvene planete!',
+    portalName: 'Prvi korak na Marsu',
+    portalSource: require('../videos/Mars360.mp4'),
+    portalBackground: require('../assets/backgroundImages/PortalsBackgrounds/mars.png'),
+    themeColor: '#ce7c56',
+    portalId: 'mars',
   },
   lions: {
-    portalTitle: 'Susret sa lavovima',
-    portalSource: require('../videos/lions.mp4'),
+    portalTitle: '**Bliski susret sa lavovima**\n- Igra sa kraljem životinja -',
+    portalName: 'Bliski susret sa lavovima',
+    portalSource: require('../videos/Lions360.mp4'),
+    portalBackground: require('../assets/backgroundImages/PortalsBackgrounds/savannah.png'),
+    themeColor: '#5bd9ff',
     portalId: 'lions',
   },
-  asteroid: {
-    portalTitle: 'Napad asteroida',
-    portalSource: require('../videos/asteroid.mp4'),
-    portalId: 'asteroid',
+  ocean: {
+    portalTitle: 'Zaronite na živopisno dno\n**koralnog grebena!**',
+    portalName: 'Život na dnu koralnog grebena',
+    portalSource: require('../videos/CoralReef360.mp4'),
+    portalBackground: require('../assets/backgroundImages/PortalsBackgrounds/ocean.png'),
+    themeColor: '##3aa7aa',
+    portalId: 'ocean',
   },
-  underwater: {
-    portalTitle: 'Okeanske dubine',
-    portalSource: require('../videos/underwater.mp4'),
-    portalId: 'underwater',
+  bloodflow: {
+    portalTitle:
+      '**Zavirite u krvotok**\nUpoznajte ljudsko tijelo iz nove perspektive!',
+    portalName: 'Krvotok čovjeka',
+    portalSource: require('../videos/Bloodflow360.mp4'),
+    portalBackground: require('../assets/backgroundImages/PortalsBackgrounds/blood-flow.png'),
+    themeColor: '#db6363',
+    portalId: 'bloodflow',
   },
 };
 

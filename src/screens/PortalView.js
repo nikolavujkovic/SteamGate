@@ -20,6 +20,7 @@ import {
 } from '@viro-community/react-viro';
 import Icons from '../constants/Icons';
 import PortalLoading from '../components/PortalLoading';
+import portalConstants from '../constants/portalConstants';
 
 const initText = 'Pomjerajte polako Vaš uređaj...';
 
@@ -73,8 +74,8 @@ class PortalViewClass extends Component {
   render() {
     const {portalTitle, portalVideoSource} = {
       // ...props,
-      portalTitle: 'Neki kul video svemira',
-      portalVideoSource: require('../videos/fake.mp4'),
+      portalTitle: portalConstants[this.props.portalId].portalName,
+      portalVideoSource: portalConstants[this.props.portalId].portalSource,
     };
 
     const toggleVideoPlayback = () => {
@@ -219,7 +220,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function (props) {
+export default function ({route}) {
   const navigation = useNavigation();
-  return <PortalViewClass navigation={navigation} />;
+  return (
+    <PortalViewClass navigation={navigation} portalId={route.params.portalId} />
+  );
 }
