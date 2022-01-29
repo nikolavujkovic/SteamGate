@@ -19,8 +19,9 @@ import portalConstants from '../constants/portalConstants';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const portalData = Object.keys(portalConstants).map(key => portalConstants[key]);
-
+const portalData = Object.keys(portalConstants).map(
+  key => portalConstants[key],
+);
 
 export default function PortalHub() {
   const [counter, setCounter] = useState(0);
@@ -31,37 +32,60 @@ export default function PortalHub() {
   };
 
   const handleClick = direction => {
-    if (direction === 'up' && counter < 4) {
-      toggleVisible(false);
 
-      setTimeout(function () {
-        setCounter(counter + 1);
-        toggleVisible(true);
-      }, 250);
-    } else if (direction === 'down' && counter > 0) {
+    if (direction === 'up') {
       toggleVisible(false);
-
-      setTimeout(function () {
-        setCounter(counter - 1);
-        toggleVisible(true);
-      }, 250);
-    }
+      if (counter < 4) {
+        setTimeout(function () {
+          setCounter(counter + 1);
+          toggleVisible(true);
+        }, 250);
+      } else {
+        setTimeout(function () {
+          setCounter(0);
+          toggleVisible(true);
+        }, 250);
+      }
+    } else if (direction === 'down') {
+      toggleVisible(false);
+      if (counter > 0) {     
+        setTimeout(function () {
+          setCounter(counter - 1);
+          toggleVisible(true);
+        }, 250);
+      }
+      else {
+        setTimeout(function () {
+          setCounter(4);
+          toggleVisible(true);
+        }, 250);
+      }
+    } 
   };
 
   return (
-    <SafeAreaView style={styles.backgroundBodyStyle}>
+    <SafeAreaView
+      style={[
+        styles.backgroundBodyStyle,
+        {backgroundColor: portalData[counter].themeColor},
+      ]}>
       <FadeInOut
-        style={[{width: '100%', position: 'absolute'}]}
+        style={[
+          {
+            width: '100%',
+            position: 'absolute',
+            backgroundColor: portalData[counter].themeColor,
+          },
+        ]}
         visible={visible}
         duration={350}>
         <ImageBackground
           source={portalData[counter].portalBackground}
           style={styles.backgroundStyle}>
           <LinearGradient
-            colors={['rgba(0, 0, 0, 0.6)', 'transparent']}
+            colors={['rgba(0, 0, 0, 0.7)', 'transparent']}
             style={{flex: 0.2, width: '100%'}}>
-            <Text
-              style={styles.titleStyle}>
+            <Text style={styles.titleStyle}>
               {portalData[counter].portalTitle}
             </Text>
           </LinearGradient>
@@ -122,11 +146,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   titleStyle: {
-    fontSize: 20,
-    fontFamily: 'Sen-Regular',
+    fontSize: 24,
+    fontFamily: 'Sen-Bold',
     color: '#ffffff',
     paddingHorizontal: 12,
-    paddingVertical: 16,
+    paddingVertical: 24,
     textAlign: 'center',
   },
   portalCotainer: {
