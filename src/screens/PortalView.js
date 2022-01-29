@@ -22,7 +22,7 @@ import Icons from '../constants/Icons';
 import PortalLoading from '../components/PortalLoading';
 import portalConstants from '../constants/portalConstants';
 
-const initText = 'Pomjerajte polako Vaš uređaj...';
+const initText = 'Pomjerajte polako uređaj...';
 
 class PortalViewClass extends Component {
   state = {
@@ -68,6 +68,7 @@ class PortalViewClass extends Component {
   }
 
   componentWillUnmount() {
+    this.setState({shouldHide: true});
     this.backHandler.remove();
   }
 

@@ -203,8 +203,8 @@ export default {
       modelSource: require('../models/botany/model3/mimoza/a_mimoza.gltf'),
       modelResourcesArr: [
         require('../models/botany/model3/mimoza/mimoza.bin'),
-        require('../models/botany/model3/mimoza/Material__39.002_baseColor.png'),
-        require('../models/botany/model3/mimoza/Material__40.002_baseColor.png'),
+        require('../models/botany/model3/mimoza/Material__39_002_baseColor.png'),
+        require('../models/botany/model3/mimoza/Material__40_002_baseColor.png'),
       ],
       scaleDivider: 7,
     },
@@ -287,7 +287,7 @@ export default {
       modelSource: require('../models/electronics/model4/INTELCeleron/a_intel.gltf'),
       modelResourcesArr: [
         require('../models/electronics/model4/INTELCeleron/intel.bin'),
-        require('../models/electronics/model4/INTELCeleron/None_3543.png.7842_baseColor.png'),
+        require('../models/electronics/model4/INTELCeleron/None_35437842_baseColor.png'),
       ],
       scaleDivider: 2,
     },

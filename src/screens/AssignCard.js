@@ -4,16 +4,15 @@ import {
   SafeAreaView,
   StyleSheet,
   FlatList,
-  Dimensions,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import deckConstants from '../constants/deckConstants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import subjectConstants from '../constants/subjectConstants';
 import Icons from '../constants/Icons';
 import FastImage from 'react-native-fast-image';
-import {useState} from 'react/cjs/react.development';
 import Toast from 'react-native-simple-toast';
 
 const {height, width} = Dimensions.get('window');
@@ -31,9 +30,11 @@ export default function AssignCard({route, navigation}) {
   }));
 
   useEffect(async () => {
-    let selectedDeck = JSON.parse(JSON.stringify(deckConstants.playingCards));
+    let selectedDeckInit = JSON.parse(
+      JSON.stringify(deckConstants.playingCards),
+    );
     Promise.all(
-      Object.keys(selectedDeck).map(async (key, index) => {
+      Object.keys(selectedDeckInit).map(async (key, index) => {
         try {
           const value = await AsyncStorage.getItem(key);
           if (value === null) return null;
@@ -84,7 +85,6 @@ export default function AssignCard({route, navigation}) {
     let theIndex;
     let newState = JSON.parse(JSON.stringify(cardState));
     let text = 'Karta uspješno dodjeljena';
-
     Promise.all(
       Object.keys(selectedDeck).map(async (key, index) => {
         if (key === CID) {
@@ -95,7 +95,6 @@ export default function AssignCard({route, navigation}) {
           const value = await AsyncStorage.getItem(key);
           if (value === null) return null;
           const [recievedSubjectId, recievedModelId] = value.split('|');
-
           if (recievedSubjectId === SID && parseInt(recievedModelId) === MID) {
             console.log(CID, 'should delete...');
             await AsyncStorage.removeItem(key);
@@ -109,7 +108,6 @@ export default function AssignCard({route, navigation}) {
     )
       .then(async () => {
         console.log('done twice');
-
         try {
           const value = await AsyncStorage.getItem(CID);
           let recievedModelId, recievedSubjectId;
@@ -128,21 +126,17 @@ export default function AssignCard({route, navigation}) {
           ) {
             text = 'Vrijednost karte zamjenjena';
           }
-
           await AsyncStorage.setItem(CID, SID + '|' + MID.toString());
           newState[theIndex] = {
             id: CID,
             recievedModelId: MID,
             recievedSubjectId: SID,
           };
-
           console.log(`Card ${CID} assigned successfully to ${SID}|${MID}.`);
         } catch (e) {
           console.warn(e);
         }
-
         setCardState(newState);
-
         if (noToastCurrently) {
           Toast.show(text, Toast.SHORT);
           setNoToastCurrently(false);
@@ -162,7 +156,6 @@ export default function AssignCard({route, navigation}) {
         console.warn(e);
       }
     });
-
     setCardState([]);
   };
 

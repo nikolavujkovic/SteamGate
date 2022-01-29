@@ -24,7 +24,7 @@ import modelConstants from '../constants/modelConstants';
 import subjectConstants from '../constants/subjectConstants';
 import ModelLoading from '../components/ModelLoading';
 
-const initText = 'Pomjerajte polako Vaš uređaj...';
+const initText = 'Pomjerajte polako uređaj...';
 
 class ModelView extends Component {
   // fix shadow
@@ -74,6 +74,7 @@ class ModelView extends Component {
   }
 
   componentWillUnmount() {
+    this.setState({shouldHide: true});
     this.backHandler.remove();
   }
 
