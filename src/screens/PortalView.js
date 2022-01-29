@@ -21,8 +21,11 @@ import {
 import Icons from '../constants/Icons';
 import PortalLoading from '../components/PortalLoading';
 import portalConstants from '../constants/portalConstants';
+import Toast from 'react-native-simple-toast';
 
-const initText = 'Pomjerajte polako uređaj...';
+const initText = 'Pomjerajte polako uređaj...'; //this means Move the device slowly
+const errorText =
+  'Prekoračenje memorije! Ukoliko se portali ne prikazuju, molimo Vas restartujte aplikaciju i pokušajte ponovo!';
 
 class PortalViewClass extends Component {
   state = {
@@ -35,6 +38,8 @@ class PortalViewClass extends Component {
     ready: false,
     fadeAnim: new Animated.Value(1),
     selectedAstro: Math.floor(Math.random() * 3),
+    ARSCENE: null,
+    error: false,
   };
 
   fadeOut = () => {
@@ -47,16 +52,88 @@ class PortalViewClass extends Component {
 
   backAction = () => {
     if (!this.state.backAllowed) return true;
-    this.setState({shouldHide: true});
-    this.props.navigation.goBack();
+
+    this.setState({
+      shouldHide: true,
+      ARSCENE: null,
+    });
+    this.props.navigation.pop();
+
     return true;
   };
+
+  displayErrorMessage = e => {
+    console.log(e.nativeEvent.error);
+    this.setState({error: true});
+  };
+
+  shouldPause = (a, b) => {
+    console.log('should pause:', a || !b);
+    return a || !b;
+  };
+
+  newARSCENE =
+    (portalTitle, portalVideoSource, portalVolume = 1) =>
+    () =>
+      (
+        <ViroARScene
+          onTrackingUpdated={t => {
+            console.log('t', t);
+            t === ViroConstants.TRACKING_UNAVAILABLE
+              ? this.setState({titleText: initText, portalVisible: false})
+              : this.setState({titleText: portalTitle, portalVisible: true});
+          }}>
+          <ViroAmbientLight color="#fff" />
+          <ViroPortalScene passable={true}>
+            <ViroPortal
+              visible={this.state.portalVisible}
+              position={[0, 0, -1]}
+              scale={[0.2, 0.2, 0.2]}>
+              <Viro3DObject
+                source={require('../models/ViroPortal/portal_archway.vrx')}
+                resources={[
+                  require('../models/ViroPortal/portal_archway_diffuse.png'),
+                  require('../models/ViroPortal/portal_archway_normal.png'),
+                  require('../models/ViroPortal/portal_archway_specular.png'),
+                  require('../models/ViroPortal/portal_entry.png'),
+                ]}
+                type="VRX"
+              />
+            </ViroPortal>
+
+            <Viro360Video
+              loop
+              paused={this.shouldPause(
+                this.state.isPaused,
+                this.state.portalVisible,
+              )}
+              muted={this.state.isMuted}
+              volume={portalVolume}
+              source={portalVideoSource}
+              onError={e => this.displayErrorMessage(e)}
+            />
+          </ViroPortalScene>
+        </ViroARScene>
+      );
 
   componentDidMount() {
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       this.backAction,
     );
+
+    const {portalTitle, portalVideoSource} = {
+      // ...props,
+      portalTitle: portalConstants[this.props.portalId].portalName,
+      portalVideoSource: portalConstants[this.props.portalId].portalSource,
+      portalVolume: portalConstants[this.props.portalId].portalVolume
+        ? portalConstants[this.props.portalId].portalVolume
+        : 1,
+    };
+
+    console.log('THE PASSED SOURCE', portalVideoSource);
+    const AR = this.newARSCENE(portalTitle, portalVideoSource);
+    this.setState({ARSCENE: AR});
 
     setTimeout(() => {
       this.setState({backAllowed: true});
@@ -68,17 +145,12 @@ class PortalViewClass extends Component {
   }
 
   componentWillUnmount() {
+    console.log('unmounted');
     this.setState({shouldHide: true});
     this.backHandler.remove();
   }
 
   render() {
-    const {portalTitle, portalVideoSource} = {
-      // ...props,
-      portalTitle: portalConstants[this.props.portalId].portalName,
-      portalVideoSource: portalConstants[this.props.portalId].portalSource,
-    };
-
     const toggleVideoPlayback = () => {
       this.setState({isPaused: !this.state.isPaused});
     };
@@ -86,46 +158,14 @@ class PortalViewClass extends Component {
       this.setState({isMuted: !this.state.isMuted});
     };
 
-    const ARSCENE = () => (
-      <ViroARScene
-        onTrackingUpdated={t => {
-          console.log('t', t);
-          t === ViroConstants.TRACKING_UNAVAILABLE
-            ? this.setState({titleText: initText, portalVisible: false})
-            : this.setState({titleText: portalTitle, portalVisible: true});
-        }}>
-        <ViroAmbientLight color="#fff" />
-        <ViroPortalScene passable={true}>
-          <ViroPortal
-            visible={this.state.portalVisible}
-            position={[0, 0, -1]}
-            scale={[0.2, 0.2, 0.2]}>
-            <Viro3DObject
-              source={require('../models/ViroPortal/portal_archway.vrx')}
-              resources={[
-                require('../models/ViroPortal/portal_archway_diffuse.png'),
-                require('../models/ViroPortal/portal_archway_normal.png'),
-                require('../models/ViroPortal/portal_archway_specular.png'),
-                require('../models/ViroPortal/portal_entry.png'),
-              ]}
-              type="VRX"
-            />
-          </ViroPortal>
-
-          <Viro360Video
-            loop
-            paused={this.state.isPaused}
-            muted={this.state.isMuted}
-            // volume={videoVolume}
-            source={portalVideoSource}
-          />
-        </ViroPortalScene>
-      </ViroARScene>
-    );
-
     return this.state.shouldHide ? null : (
       <>
-        <ViroARSceneNavigator autofocus initialScene={{scene: ARSCENE}} />
+        {this.state.ARSCENE && (
+          <ViroARSceneNavigator
+            autofocus
+            initialScene={{scene: this.state.ARSCENE}}
+          />
+        )}
         <Text style={styles.title}>{this.state.titleText}</Text>
         <TouchableOpacity
           activeOpacity={0.9}
@@ -157,6 +197,12 @@ class PortalViewClass extends Component {
             />
           </TouchableOpacity>
         </View>
+
+        {this.state.error && (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>{errorText}</Text>
+          </View>
+        )}
 
         {!this.state.ready && (
           <Animated.View
@@ -218,6 +264,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
+  },
+
+  errorContainer: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+  },
+  errorText: {
+    opacity: 0.7,
+    position: 'absolute',
+    fontFamily: 'Sen-Bold',
+    color: 'red',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 10,
+    marginHorizontal: 30,
+    fontSize: 18,
+    textAlign: 'center',
+    marginTop: '15%',
+    bottom: 75,
   },
 });
 

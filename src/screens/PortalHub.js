@@ -127,7 +127,9 @@ export default function PortalHub({navigation}) {
           {
             width: '100%',
             position: 'absolute',
-            backgroundColor: portalData[counter].themeColor,
+            backgroundColor: portalData[counter].themeColor
+              ? portalData[counter].themeColor
+              : 'black',
           },
         ]}
         visible={visible}
@@ -201,6 +203,7 @@ const styles = StyleSheet.create({
   backgroundBodyStyle: {
     height: '100%',
     width: '100%',
+    backgroundColor: 'black',
   },
   backgroundStyle: {
     height: '100%',
