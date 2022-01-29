@@ -239,7 +239,7 @@ export default {
       modelResourcesArr: [
         require('../models/electronics/model1/asusZ170-P/asus.bin'),
         require('../models/electronics/model1/asusZ170-P/Asus_Z170-P_Mobo_baseColor.jpg'),
-        require('../models/electronics/model1/asusZ170-P/Asus_Z170-P_Mobo_metallicRoughness.png'),
+        require('../models/electronics/model1/asusZ170-P/Asus_Z170-P_Mobo_metallicRoughness.jpg'),
         require('../models/electronics/model1/asusZ170-P/Asus_Z170-P_Mobo_normal.png'),
       ],
       scaleDivider: 6,

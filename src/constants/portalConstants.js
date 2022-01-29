@@ -26,7 +26,7 @@ export default {
   },
   ocean: {
     portalTitle: 'Zaronite na živopisno dno\n**koralnog grebena!**',
-    portalName: 'Život na dnu koralnog grebena',
+    portalName: 'Dno koralnog grebena',
     portalSource: require('../videos/CoralReef360.mp4'),
     portalBackground: require('../assets/backgroundImages/PortalsBackgrounds/ocean.png'),
     themeColor: '##3aa7aa',
