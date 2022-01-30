@@ -260,14 +260,9 @@ class DeckView extends Component {
           }}>
           <Viro3DObject
             source={require('../models/TY/fokuspokus_model.glb')}
-            scale={[0.3, 0.3, 0.3]}
+            scale={[0.4, 0.4, 0.4]}
             type={'GLB'}
             position={[0, 0.15, 0]}
-            animation={{
-              name: 'rotate',
-              run: true,
-              loop: true,
-            }}
           />
         </ViroARImageMarker>
       </React.Fragment>,
@@ -400,7 +395,7 @@ class DeckView extends Component {
     ViroAnimations.registerAnimations({
       rotate: {
         properties: {
-          rotateY: '+=90',
+          rotateY: '+=180',
         },
         duration: 3000,
       },
