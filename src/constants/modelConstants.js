@@ -355,7 +355,7 @@ export default {
     {
       modelTitle: 'Rubikov natpis',
       modelLogo: require('../assets/modelImages/illusions/word.png'),
-      modelImage: require('../assets/modelPreviews/anatomy/jetraP.png'),
+      modelImage: require('../assets/modelPreviews/illusions/wordP.png'),
       modelType: 'GLTF',
       modelScale: 0.08,
       shadowVisible: false,
@@ -367,7 +367,7 @@ export default {
     {
       modelTitle: 'Svevideći zmaj',
       modelLogo: require('../assets/modelImages/illusions/drake.png'),
-      modelImage: require('../assets/modelPreviews/anatomy/jetraP.png'),
+      modelImage: require('../assets/modelPreviews/illusions/drakeP.png'),
       modelType: 'OBJ',
       modelScale: 0.00003,
       shadowVisible: false,
@@ -383,7 +383,7 @@ export default {
     {
       modelTitle: 'Trougao iluzije',
       modelLogo: require('../assets/modelImages/illusions/triangle.png'),
-      modelImage: require('../assets/modelPreviews/anatomy/jetraP.png'),
+      modelImage: require('../assets/modelPreviews/illusions/triangleP.png'),
       modelType: 'GLTF',
       modelScale: 0.015,
       shadowVisible: false,
@@ -400,7 +400,7 @@ export default {
     {
       modelTitle: 'Nemoguća kocka',
       modelLogo: require('../assets/modelImages/illusions/square.png'),
-      modelImage: require('../assets/modelPreviews/anatomy/jetraP.png'),
+      modelImage: require('../assets/modelPreviews/illusions/squareP.png'),
       modelType: 'GLTF',
       modelScale: 0.00005,
       shadowVisible: false,
@@ -423,7 +423,7 @@ export default {
     {
       modelTitle: 'Kinetički objekat',
       modelLogo: require('../assets/modelImages/illusions/kinetic.png'),
-      modelImage: require('../assets/modelPreviews/anatomy/jetraP.png'),
+      modelImage: require('../assets/modelPreviews/illusions/kineticP.png'),
       modelType: 'VRX',
       modelScale: 10,
       shadowVisible: true,

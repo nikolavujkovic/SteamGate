@@ -259,7 +259,7 @@ class DeckView extends Component {
             this.setState({endOfPresentation: true});
           }}>
           <Viro3DObject
-            source={require('../models/TY/steamgate_model.glb')}
+            source={require('../models/TY/fokuspokus_model.glb')}
             scale={[0.3, 0.3, 0.3]}
             type={'GLB'}
             position={[0, 0.15, 0]}
