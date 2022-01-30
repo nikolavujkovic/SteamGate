@@ -16,13 +16,26 @@ import {
   ViroQuad,
   Viro3DObject,
   ViroARPlane,
-  ViroMaterials,
   ViroConstants,
 } from '@viro-community/react-viro';
 import Icons from '../constants/Icons';
 import modelConstants from '../constants/modelConstants';
 import subjectConstants from '../constants/subjectConstants';
 import ModelLoading from '../components/ModelLoading';
+
+import {playSound} from '../components/AppSound';
+import Sound from 'react-native-sound';
+import dingS from '../assets/sounds/modelSound.mp3';
+Sound.setCategory('Playback');
+let SOUNDlol = new Sound(dingS);
+
+import dingS2 from '../assets/sounds/buttonPressed.mp3';
+Sound.setCategory('Playback');
+let BUTTONlol = new Sound(dingS2);
+
+import dingS3 from '../assets/sounds/functionPressed.mp3';
+Sound.setCategory('Playback');
+let FUNCTIONlol = new Sound(dingS3);
 
 const initText = 'Pomjerajte polako uređaj...';
 
@@ -45,6 +58,7 @@ class ModelView extends Component {
 
   backAction = () => {
     if (!this.state.backAllowed) return true;
+    playSound(BUTTONlol);
     this.setState({shouldHide: true});
     this.props.navigation.goBack();
     return true;
@@ -59,6 +73,8 @@ class ModelView extends Component {
   };
 
   componentDidMount() {
+    playSound(SOUNDlol);
+
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       this.backAction,
@@ -214,7 +230,9 @@ class ModelView extends Component {
         <Text style={styles.title}>{this.state.titleText}</Text>
         <TouchableOpacity
           activeOpacity={0.9}
-          onPress={() => this.backAction()}
+          onPress={() => {
+            this.backAction();
+          }}
           style={styles.backButton}>
           <Icons.AntDesign name="arrowleft" size={16} color="black" />
           <Text style={styles.backButtonText}>Nazad</Text>
@@ -227,6 +245,7 @@ class ModelView extends Component {
                 key={index}
                 activeOpacity={0.7}
                 onPress={() => {
+                  playSound(FUNCTIONlol);
                   this.setState({
                     specialAnimationRunning: true,
                     specialAnimationName: item.name,

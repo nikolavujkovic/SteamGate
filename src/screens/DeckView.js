@@ -22,6 +22,22 @@ import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeckLoading from '../components/DeckLoading';
 
+import {playSound} from '../components/AppSound';
+import dingS from '../assets/sounds/deckSound.mp3';
+import Sound from 'react-native-sound';
+Sound.setCategory('Playback');
+let SOUNDlol = new Sound(dingS);
+
+import dingS2 from '../assets/sounds/assignedCard.mp3';
+let SOUNDlol2 = new Sound(dingS2);
+
+import dingS3 from '../assets/sounds/functionPressed.mp3';
+let FUNCTIONSOUND = new Sound(dingS3);
+
+import dingS4 from '../assets/sounds/buttonPressed.mp3';
+let BUTTONSOUND = new Sound(dingS4);
+BUTTONSOUND.setVolume(0.5);
+
 const initText = ['Skenirajte kartu...'];
 
 class DeckView extends Component {
@@ -47,6 +63,7 @@ class DeckView extends Component {
 
   backAction = () => {
     if (!this.state.backAllowed) return true;
+    playSound(BUTTONSOUND);
     this.setState({shouldHide: true});
     this.props.navigation.goBack();
     return true;
@@ -61,6 +78,8 @@ class DeckView extends Component {
   };
 
   refreshHandler = () => {
+    playSound(SOUNDlol);
+
     this.setState({
       ARSCENE: null,
       onlyVisible: null,
@@ -127,6 +146,8 @@ class DeckView extends Component {
               key={index}
               target={item.modelTarget}
               onAnchorFound={() => {
+                playSound(SOUNDlol2);
+
                 console.log('ANCHOR FOUND BBY');
                 this.setState(
                   this.state.foundModelTitle === initText
@@ -270,7 +291,9 @@ class DeckView extends Component {
   };
 
   componentDidMount() {
-    console.log('Component will mount');
+    playSound(SOUNDlol);
+
+    console.log('Component will MOUNT');
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       this.backAction,
@@ -327,7 +350,9 @@ class DeckView extends Component {
 
           <TouchableOpacity
             activeOpacity={0.9}
-            onPress={() => this.backAction()}
+            onPress={() => {
+              this.backAction();
+            }}
             style={styles.backButton}>
             <Icons.AntDesign name="arrowleft" size={16} color="black" />
             <Text style={styles.backButtonText}>Nazad</Text>
@@ -365,6 +390,7 @@ class DeckView extends Component {
                 key={index}
                 activeOpacity={0.7}
                 onPress={() => {
+                  playSound(FUNCTIONSOUND);
                   this.setState(
                     {
                       specialAnimationRunning: true,

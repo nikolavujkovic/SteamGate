@@ -4,12 +4,25 @@ import {useNavigation} from '@react-navigation/native';
 import FastImage from 'react-native-fast-image';
 import {Dimensions} from 'react-native';
 
+import {playSound} from '../components/AppSound';
+import dingS from '../assets/sounds/buttonPressed.mp3';
+import Sound from 'react-native-sound';
+Sound.setCategory('Playback');
+let SOUNDlol = new Sound(dingS);
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const ModelItem = ({backgroundCardColor, subjectId, itemData, index}) => {
+const ModelItem = ({
+  backgroundCardColor,
+  subjectId,
+  itemData,
+  index,
+  length,
+}) => {
   const navigation = useNavigation();
   const onPress = () => {
+    playSound(SOUNDlol);
     navigation.navigate('ModelScreen', {
       subjectId: subjectId,
       modelId: index,
@@ -24,7 +37,7 @@ const ModelItem = ({backgroundCardColor, subjectId, itemData, index}) => {
         styles.itemStyle,
         {
           backgroundColor: backgroundCardColor,
-          marginEnd: index % 2 == 0 ? 15 : 0,
+          marginEnd: index % 2 == 0 ? (index !== length - 1 ? 15 : 0) : 0,
         },
       ]}>
       <Text style={styles.itemText}>{itemData.modelTitle}</Text>

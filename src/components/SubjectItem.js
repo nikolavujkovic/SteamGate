@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, TouchableWithoutFeedback} from 'react-native';
-
-import {Dimensions} from 'react-native';
-
 import FastImage from 'react-native-fast-image';
 import {useNavigation} from '@react-navigation/native';
-
 import modelConstants from '../constants/modelConstants';
+
+import {playSound} from '../components/AppSound';
+import dingS from '../assets/sounds/buttonPressed.mp3';
+import Sound from 'react-native-sound';
+Sound.setCategory('Playback');
+let SOUNDlol = new Sound(dingS);
 
 const SubjectItem = ({itemData}) => {
   const navigation = useNavigation();
@@ -15,7 +17,8 @@ const SubjectItem = ({itemData}) => {
 
   return (
     <TouchableWithoutFeedback
-      onPress={() =>
+      onPress={() => {
+        playSound(SOUNDlol);
         navigation.navigate('SubjectScreen', {
           subjectName: itemData.subjectName,
           subjectDescription: itemData.subjectDescription,
@@ -25,8 +28,8 @@ const SubjectItem = ({itemData}) => {
           themeColor: itemData.themeColor,
           subjectId: itemData.subjectId,
           modelsInfo: modelConstants[itemData.subjectId],
-        })
-      }>
+        });
+      }}>
       <View
         style={[
           styles.cardStyle,

@@ -21,7 +21,24 @@ import {
 import Icons from '../constants/Icons';
 import PortalLoading from '../components/PortalLoading';
 import portalConstants from '../constants/portalConstants';
-import Toast from 'react-native-simple-toast';
+
+import {playSound} from '../components/AppSound';
+import Sound from 'react-native-sound';
+import dingS from '../assets/sounds/portalSound2.mp3';
+Sound.setCategory('Playback');
+let SOUNDlol = new Sound(dingS);
+
+import dingS2 from '../assets/sounds/functionPressed.mp3';
+Sound.setCategory('Playback');
+let FUNCTIONlol = new Sound(dingS2);
+
+import dingS3 from '../assets/sounds/buttonPressed.mp3';
+Sound.setCategory('Playback');
+let BUTTONlol = new Sound(dingS3);
+
+import dingS4 from '../assets/sounds/errorSoundBAD.mp3';
+Sound.setCategory('Playback');
+let ERRORlol = new Sound(dingS4);
 
 const initText = 'Pomjerajte polako uređaj...'; //this means Move the device slowly
 const errorText =
@@ -53,6 +70,8 @@ class PortalViewClass extends Component {
   backAction = () => {
     if (!this.state.backAllowed) return true;
 
+    playSound(BUTTONlol);
+
     this.setState({
       shouldHide: true,
       ARSCENE: null,
@@ -64,6 +83,7 @@ class PortalViewClass extends Component {
 
   displayErrorMessage = e => {
     console.log(e.nativeEvent.error);
+    setTimeout(() => playSound(ERRORlol), 1000);
     this.setState({error: true});
   };
 
@@ -72,57 +92,57 @@ class PortalViewClass extends Component {
     return a || !b;
   };
 
-  newARSCENE =
-    (portalTitle, portalVideoSource, portalVolume = 1) =>
-    () =>
-      (
-        <ViroARScene
-          onTrackingUpdated={t => {
-            console.log('t', t);
-            t === ViroConstants.TRACKING_UNAVAILABLE
-              ? this.setState({titleText: initText, portalVisible: false})
-              : this.setState({titleText: portalTitle, portalVisible: true});
-          }}>
-          <ViroAmbientLight color="#fff" />
-          <ViroPortalScene passable={true}>
-            <ViroPortal
-              visible={this.state.portalVisible}
-              position={[0, 0, -1]}
-              scale={[0.2, 0.2, 0.2]}>
-              <Viro3DObject
-                source={require('../models/ViroPortal/portal_archway.vrx')}
-                resources={[
-                  require('../models/ViroPortal/portal_archway_diffuse.png'),
-                  require('../models/ViroPortal/portal_archway_normal.png'),
-                  require('../models/ViroPortal/portal_archway_specular.png'),
-                  require('../models/ViroPortal/portal_entry.png'),
-                ]}
-                type="VRX"
-              />
-            </ViroPortal>
-
-            <Viro360Video
-              loop
-              paused={this.shouldPause(
-                this.state.isPaused,
-                this.state.portalVisible,
-              )}
-              muted={this.state.isMuted}
-              volume={portalVolume}
-              source={portalVideoSource}
-              onError={e => this.displayErrorMessage(e)}
+  newARSCENE = (portalTitle, portalVideoSource, portalVolume) => () =>
+    (
+      <ViroARScene
+        onTrackingUpdated={t => {
+          console.log('t', t);
+          t === ViroConstants.TRACKING_UNAVAILABLE
+            ? this.setState({titleText: initText, portalVisible: false})
+            : this.setState({titleText: portalTitle, portalVisible: true});
+        }}>
+        <ViroAmbientLight color="#fff" />
+        <ViroPortalScene passable={true}>
+          <ViroPortal
+            visible={this.state.portalVisible}
+            position={[0, 0, -1]}
+            scale={[0.2, 0.2, 0.2]}>
+            <Viro3DObject
+              source={require('../models/ViroPortal/portal_archway.vrx')}
+              resources={[
+                require('../models/ViroPortal/portal_archway_diffuse.png'),
+                require('../models/ViroPortal/portal_archway_normal.png'),
+                require('../models/ViroPortal/portal_archway_specular.png'),
+                require('../models/ViroPortal/portal_entry.png'),
+              ]}
+              type="VRX"
             />
-          </ViroPortalScene>
-        </ViroARScene>
-      );
+          </ViroPortal>
+
+          <Viro360Video
+            loop
+            paused={this.shouldPause(
+              this.state.isPaused,
+              this.state.portalVisible,
+            )}
+            muted={this.state.isMuted}
+            volume={portalVolume}
+            source={portalVideoSource}
+            onError={e => this.displayErrorMessage(e)}
+          />
+        </ViroPortalScene>
+      </ViroARScene>
+    );
 
   componentDidMount() {
+    playSound(SOUNDlol);
+
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       this.backAction,
     );
 
-    const {portalTitle, portalVideoSource} = {
+    const {portalTitle, portalVideoSource, portalVolume} = {
       // ...props,
       portalTitle: portalConstants[this.props.portalId].portalName,
       portalVideoSource: portalConstants[this.props.portalId].portalSource,
@@ -132,7 +152,7 @@ class PortalViewClass extends Component {
     };
 
     console.log('THE PASSED SOURCE', portalVideoSource);
-    const AR = this.newARSCENE(portalTitle, portalVideoSource);
+    const AR = this.newARSCENE(portalTitle, portalVideoSource, portalVolume);
     this.setState({ARSCENE: AR});
 
     setTimeout(() => {
@@ -152,9 +172,11 @@ class PortalViewClass extends Component {
 
   render() {
     const toggleVideoPlayback = () => {
+      playSound(FUNCTIONlol);
       this.setState({isPaused: !this.state.isPaused});
     };
     const toggleVideoSound = () => {
+      playSound(FUNCTIONlol);
       this.setState({isMuted: !this.state.isMuted});
     };
 
@@ -169,7 +191,9 @@ class PortalViewClass extends Component {
         <Text style={styles.title}>{this.state.titleText}</Text>
         <TouchableOpacity
           activeOpacity={0.9}
-          onPress={() => this.backAction()}
+          onPress={() => {
+            this.backAction();
+          }}
           style={styles.backButton}>
           <Icons.AntDesign name="arrowleft" size={16} color="black" />
           <Text style={styles.backButtonText}>Nazad</Text>

@@ -16,6 +16,12 @@ import FastImage from 'react-native-fast-image';
 
 import portalConstants from '../constants/portalConstants';
 
+import {playSound} from '../components/AppSound';
+import Sound from 'react-native-sound';
+import dingS from '../assets/sounds/arrowPressed.mp3';
+Sound.setCategory('Playback');
+let SOUNDlol = new Sound(dingS);
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -56,6 +62,8 @@ export default function PortalHub({navigation}) {
   };
 
   const handleClick = direction => {
+    playSound(SOUNDlol);
+
     if (direction === 'up') {
       toggleVisible(false);
       if (counter < 4) {

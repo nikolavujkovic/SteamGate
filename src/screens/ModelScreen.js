@@ -14,6 +14,12 @@ import subjectConstants from '../constants/subjectConstants';
 import modelDescriptions from '../assets/modelDescriptions';
 import Icons from '../constants/Icons';
 
+import {playSound} from '../components/AppSound';
+import dingS from '../assets/sounds/buttonPressed.mp3';
+import Sound from 'react-native-sound';
+Sound.setCategory('Playback');
+let SOUNDlol = new Sound(dingS);
+
 const {height, width} = Dimensions.get('window');
 const bodyPadding = 16;
 const headerHeight = 80;
@@ -61,6 +67,8 @@ export default function ModelScreen({navigation, route}) {
   const text = arr.reduce(reducer, []);
 
   const onStartARPressed = () => {
+    // playSound(SOUNDlol);
+
     navigation.navigate('ModelView', {
       subjectId: route.params.subjectId,
       modelId: route.params.modelId,
@@ -80,6 +88,7 @@ export default function ModelScreen({navigation, route}) {
   };
 
   const addToDeck = (SID, MID) => {
+    playSound(SOUNDlol);
     navigation.navigate('AssignCard', {
       SID: SID,
       MID: MID,

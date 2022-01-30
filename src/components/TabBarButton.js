@@ -2,6 +2,12 @@ import React, {useRef, useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
+import {playSound} from '../components/AppSound';
+import Sound from 'react-native-sound';
+import dingS from '../assets/sounds/bottomTabSound.mp3';
+Sound.setCategory('Playback');
+let SOUNDlol = new Sound(dingS);
+
 //TODO: export colors to constants
 
 export default function TabBarButton(props) {
@@ -38,7 +44,10 @@ export default function TabBarButton(props) {
     <TouchableOpacity
       style={styles.container}
       activeOpacity={1}
-      onPress={onPress}>
+      onPress={() => {
+        playSound(SOUNDlol, -0.3);
+        onPress();
+      }}>
       <Animatable.View style={styles.container} ref={viewRef} duration={1000}>
         <item.type
           name={focused ? item.activeIcon : item.inactiveIcon}

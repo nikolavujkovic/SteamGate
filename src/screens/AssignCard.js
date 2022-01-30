@@ -15,6 +15,16 @@ import Icons from '../constants/Icons';
 import FastImage from 'react-native-fast-image';
 import Toast from 'react-native-simple-toast';
 
+import {playSound} from '../components/AppSound';
+import Sound from 'react-native-sound';
+import dingS from '../assets/sounds/assignedCard.mp3';
+Sound.setCategory('Playback');
+let SOUNDlol = new Sound(dingS);
+
+import dingS2 from '../assets/sounds/errorSound.mp3';
+Sound.setCategory('Playback');
+let ERRORlol = new Sound(dingS2);
+
 const {height, width} = Dimensions.get('window');
 
 export default function AssignCard({route, navigation}) {
@@ -146,9 +156,13 @@ export default function AssignCard({route, navigation}) {
         }
       })
       .catch(e => console.warn(e));
+
+    playSound(SOUNDlol, 0.2);
   };
 
   const onResetPressed = () => {
+    playSound(ERRORlol, 0.2);
+
     Object.keys(selectedDeck).map(async (key, index) => {
       try {
         await AsyncStorage.removeItem(key);

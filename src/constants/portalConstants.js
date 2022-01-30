@@ -23,13 +23,14 @@ export default {
     portalBackground: require('../assets/backgroundImages/PortalsBackgrounds/savannah.png'),
     themeColor: '#5bd9ff',
     portalId: 'lions',
+    portalVolume: 0.2,
   },
   ocean: {
     portalTitle: 'Zaronite na živopisno dno\n**koralnog grebena!**',
     portalName: 'Dno koralnog grebena',
     portalSource: require('../videos/CoralReef360.mp4'),
     portalBackground: require('../assets/backgroundImages/PortalsBackgrounds/ocean.png'),
-    themeColor: '##3aa7aa',
+    themeColor: '#3aa7aa',
     portalId: 'ocean',
   },
   bloodflow: {
@@ -40,6 +41,7 @@ export default {
     portalBackground: require('../assets/backgroundImages/PortalsBackgrounds/blood-flow.png'),
     themeColor: '#db6363',
     portalId: 'bloodflow',
+    portalVolume: 0.3,
   },
 };
 

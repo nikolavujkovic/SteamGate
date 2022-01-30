@@ -28,6 +28,7 @@ const SubjectScreen = ({route}) => {
       subjectId={subjectId}
       itemData={item}
       index={index}
+      length={modelsInfo.length}
     />
   );
 
