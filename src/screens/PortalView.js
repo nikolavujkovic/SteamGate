@@ -24,7 +24,7 @@ import portalConstants from '../constants/portalConstants';
 
 import {playSound} from '../components/AppSound';
 import Sound from 'react-native-sound';
-import dingS from '../assets/sounds/portalSound2.mp3';
+import dingS from '../assets/sounds/portalSound.mp3';
 Sound.setCategory('Playback');
 let SOUNDlol = new Sound(dingS);
 
