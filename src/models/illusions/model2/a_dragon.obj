@@ -6,7 +6,7 @@ mtllib dragon.mtl
 
 g Mesh1 Model
 
-usemtl dragon
+usemtl dragonMTL
 v 5020.85 6531.23 -5927.93
 vt 0.347867 0.865165
 vn 0.963088 -0.240404 0.12111
@@ -1457,7 +1457,7 @@ f 569/582/20 570/583/20 571/584/20 572/585/20 573/586/20 574/587/20 575/588/20 5
 
 g Mesh2 Model
 
-usemtl dragon1
+usemtl dragonMTL1
 v -12555.2 0 -746.768
 vt 0 0
 vn 0 25.4 -0

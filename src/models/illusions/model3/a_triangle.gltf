@@ -219,13 +219,13 @@
   ],
   "images": [
     {
-      "uri": "./Material_004_baseColor.png"
+      "uri": "Material_004_baseColor.png"
     },
     {
-      "uri": "./Material_004_metallicRoughness.png"
+      "uri": "Material_004_metallicRoughness.png"
     },
     {
-      "uri": "./Material_004_normal.png"
+      "uri": "Material_004_normal.png"
     }
   ],
   "materials": [

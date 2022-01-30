@@ -672,31 +672,31 @@
   ],
   "images": [
     {
-      "uri": "./CubeWall_baseColor.png"
+      "uri": "CubeWall_baseColor.png"
     },
     {
-      "uri": "./CubeWall_metallicRoughness.png"
+      "uri": "CubeWall_metallicRoughness.png"
     },
     {
-      "uri": "./CubeWall_normal.png"
+      "uri": "CubeWall_normal.png"
     },
     {
-      "uri": "./Chains_baseColor.png"
+      "uri": "Chains_baseColor.png"
     },
     {
-      "uri": "./Chains_metallicRoughness.png"
+      "uri": "Chains_metallicRoughness.png"
     },
     {
-      "uri": "./Chains_normal.png"
+      "uri": "Chains_normal.png"
     },
     {
-      "uri": "./material_baseColor.png"
+      "uri": "material_baseColor.png"
     },
     {
-      "uri": "./material_metallicRoughness.png"
+      "uri": "material_metallicRoughness.png"
     },
     {
-      "uri": "./material_normal.png"
+      "uri": "material_normal.png"
     }
   ],
   "materials": [
