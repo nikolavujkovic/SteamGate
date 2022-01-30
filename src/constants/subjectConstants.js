@@ -41,14 +41,14 @@ export default {
     bgColor: '#F0BAD2',
     subjectId: 'chemistry',
   },
-  // illusions: {
-  //   subjectName: 'Iluzije',
-  //   subjectDescription: 'Nauka o mikroorganizmima',
-  //   subjectImage: require('../assets/subjectImages/illusions.png'),
-  //   themeColor: '#FE9738',
-  //   bgColor: '#febd80',
-  //   subjectId: 'illusions',
-  // },
+  illusions: {
+    subjectName: 'Iluzije',
+    subjectDescription: 'Zakoračite u svijet optičkih iluzija!',
+    subjectImage: require('../assets/subjectImages/illusions.png'),
+    themeColor: '#8CCDBD',
+    bgColor: '#CDEFF6',
+    subjectId: 'illusions',
+  },
   mycology: {
     subjectName: 'Mikologija',
     subjectDescription: 'Zavirite u svijet gljiva!',

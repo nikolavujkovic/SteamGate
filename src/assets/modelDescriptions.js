@@ -80,7 +80,13 @@ Voda je **tečnost** na standardnoj ambijentnoj temperaturi i pritisku, mada se 
 Po strukturi je **karboksilna** kiselina koja osim što sadrži **karboksilnu grupu (-COOH),** takođe sadrži i hidroksilnu grupu (-OH) i to na atomu ugljenika koji je susjedni karboksilnoj grupi. 
 Zbog toga se mliječna kiselina svrstava i u grupu **alfa hidroksilnih kiselina**  (AHA). Rastvara se u **vodi** ili **alkoholu** i spada u higroskopne supstance.`,
   ],
-  // illusions: []
+  illusions: [
+    `Posmatrane iz pravog ugla, haotično raspoređene Rubikove kocke ispisuju riječ **illusion.** `,
+    `Sa koje god strane mu prišli, ovaj **zmaj** gledaće Vas pravo u oči. U pitanju nije **troglavi zmaj**, nego prava optička iluzija.`,
+    `**Trougao** ili ne? Ovaj 3D model mijenja svoj oblik u zaivisnosti od toga **odakle** ga posmatramo.`,
+    `**Kocka** ili ne? Ovaj 3D model prikazuje ono što možemo nazvati **nemogućom figurom** , a to možemo primjetiti sagledavajući iz različitih uglova.`,
+    `**Kinetički objekti** stvaraju iluziju pokreta. Ovaj 3D model djeluje kao da je stalno u pokretu, iako zapravo nije tako.`,
+  ],
   mycology: [
     `**Muhara** (lat. Amanita muscaria) je **otrovna** i  **psihoaktivna**gljiva iz roda Amanita. 
 **Šeširić** joj je crven sa **bijelim tačkama,** koje su ljepljive i ispiraju se kišama. Na dršci se nalazi omotač velum. 

@@ -73,7 +73,7 @@ class ModelView extends Component {
   };
 
   componentDidMount() {
-    playSound(SOUNDlol);
+    playSound(SOUNDlol, 0.5);
 
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
@@ -171,14 +171,14 @@ class ModelView extends Component {
               shadowMapSize={2048}
               shadowNearZ={2}
               shadowFarZ={5}
-              shadowOpacity={extraLight ? 0.75 : 0.2}
-              intensity={extraLight ? 2000 : 100}
+              shadowOpacity={extraLight ? extraLight[0] : 0.2}
+              intensity={extraLight ? extraLight[1] : 100}
             />
           )}
 
           <ViroAmbientLight
             color="#fff"
-            intensity={shadowVisible ? (extraLight ? 700 : 75) : 1000}
+            intensity={shadowVisible ? (extraLight ? extraLight[2] : 75) : 1000}
           />
 
           <Viro3DObject

@@ -19,12 +19,6 @@ import {
 import Icons from './src/constants/Icons';
 import TabBarButton from './src/components/TabBarButton';
 
-import {playSound} from './src/components/AppSound';
-import Sound from 'react-native-sound';
-import dingS from './src/assets/sounds/modelSound.mp3';
-Sound.setCategory('Playback');
-let SOUNDlol = new Sound(dingS);
-
 const Stack = createStackNavigator();
 
 const ModelStack = () => {
@@ -119,8 +113,6 @@ const TabNavigator = () => (
 export default () => {
   const [initVisible, setInitVisible] = useState(true);
   const [fadeAnim, setFadeAnim] = useState(new Animated.Value(1));
-
-  playSound(SOUNDlol);
 
   const fadeOut = () => {
     Animated.timing(fadeAnim, {

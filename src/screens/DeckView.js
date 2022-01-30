@@ -14,6 +14,8 @@ import {
   ViroARImageMarker,
   ViroARTrackingTargets,
   ViroARSceneNavigator,
+  ViroAnimations,
+  ViroSpotLight,
 } from '@viro-community/react-viro';
 import Icons from '../constants/Icons';
 import deckConstants from '../constants/deckConstants';
@@ -39,6 +41,7 @@ let BUTTONSOUND = new Sound(dingS4);
 BUTTONSOUND.setVolume(0.5);
 
 const initText = ['Skenirajte kartu...'];
+const endOfPresentationText = 'Hvala na pažnji!';
 
 class DeckView extends Component {
   state = {
@@ -59,6 +62,8 @@ class DeckView extends Component {
     specialAnimationRunning: false,
     specialAnimations: null,
     specialAnimationName: '',
+
+    endOfPresentation: false,
   };
 
   backAction = () => {
@@ -128,101 +133,153 @@ class DeckView extends Component {
   setArState = markerArr => {
     this.setState({anyCardsAssigned: markerArr.length > 0 ? true : false});
 
+    let newAR = markerArr.map((item, index) => {
+      console.log('item', item);
+      const scaleDivider = item.scaleDivider ? item.scaleDivider : 1;
+      let newPositionArray = [...item.positionArray];
+      newPositionArray[1] = newPositionArray[1] + 0.05;
+
+      if (
+        item != null
+        // && //THIS MAY IMPROVE PERFORMANCE SO ITS JUST A "just-in-case feature"
+        // (item.modelTarget == this.state.onlyVisible ||
+        //   this.state.onlyVisible == null)
+      ) {
+        return (
+          <ViroARImageMarker
+            key={index}
+            target={item.modelTarget}
+            onAnchorFound={() => {
+              playSound(SOUNDlol2);
+
+              console.log('ANCHOR FOUND BBY');
+              this.setState(
+                this.state.foundModelTitle === initText
+                  ? {foundModelTitle: [item.modelTitle]}
+                  : {
+                      foundModelTitle: [
+                        ...new Set([
+                          ...this.state.foundModelTitle,
+                          item.modelTitle,
+                        ]),
+                      ],
+                    },
+              );
+
+              if (item.specialAnimations)
+                this.setState({
+                  specialAnimations: item.specialAnimations,
+                });
+
+              // this.setState({onlyVisible: item.modelTarget});
+            }}>
+            <Viro3DObject
+              position={item.onGround ? item.positionArray : newPositionArray}
+              source={item.modelSource}
+              resources={item.modelResourcesArr}
+              scale={[
+                item.modelScale / scaleDivider,
+                item.modelScale / scaleDivider,
+                item.modelScale / scaleDivider,
+              ]}
+              type={item.modelType}
+              rotation={item.rotationArray}
+              animation={
+                item.singleAnimation
+                  ? {
+                      name: item.animationName[0],
+                      run: true,
+                      loop: true,
+                    }
+                  : item.animationName
+                  ? {
+                      name: this.state.specialAnimationRunning
+                        ? this.state.specialAnimationName
+                        : item.animationName[this.state.selectedAnimationId],
+                      run: true,
+                      loop: true,
+                      onFinish: item.singleAnimation
+                        ? null
+                        : () => {
+                            this.setState(
+                              {
+                                specialAnimationRunning: false,
+                                specialAnimationName: '',
+                                selectedAnimationId:
+                                  this.state.selectedAnimationId + 1 >
+                                  item.animationName.length - 1
+                                    ? 0
+                                    : this.state.selectedAnimationId + 1,
+                              },
+                              () => {
+                                let clonedArray = JSON.parse(
+                                  JSON.stringify(this.state.markerArrayState),
+                                );
+                                console.log(
+                                  'CLONED MARKER STATE:',
+                                  clonedArray,
+                                );
+                                this.setArState(clonedArray); // more performace efficient way);
+                              },
+
+                              // this.arRender();
+                            );
+                          },
+                    }
+                  : null
+              }
+            />
+          </ViroARImageMarker>
+        );
+      }
+    });
+
+    newAR.push(
+      <React.Fragment key="TY">
+        <ViroARImageMarker
+          target="jokerBlack"
+          onAnchorFound={() => {
+            this.setState({endOfPresentation: true});
+          }}>
+          <Viro3DObject
+            source={require('../models/TY/steamgate_model.glb')}
+            scale={[0.3, 0.3, 0.3]}
+            type={'GLB'}
+            position={[0, 0.15, 0]}
+            animation={{
+              name: 'rotate',
+              run: true,
+              loop: true,
+            }}
+          />
+        </ViroARImageMarker>
+        <ViroARImageMarker
+          target="jokerRed"
+          onAnchorFound={() => {
+            this.setState({endOfPresentation: true});
+          }}>
+          <Viro3DObject
+            source={require('../models/TY/steamgate_model.glb')}
+            scale={[0.3, 0.3, 0.3]}
+            type={'GLB'}
+            position={[0, 0.15, 0]}
+            animation={{
+              name: 'rotate',
+              run: true,
+              loop: true,
+            }}
+          />
+        </ViroARImageMarker>
+      </React.Fragment>,
+    );
+
     this.setState({
-      ARSCENEchildren: markerArr.map((item, index) => {
-        console.log('item', item);
-        const scaleDivider = item.scaleDivider ? item.scaleDivider : 1;
-        let newPositionArray = [...item.positionArray];
-        newPositionArray[1] = newPositionArray[1] + 0.05;
-
-        if (
-          item != null
-          // && //THIS MAY IMPROVE PERFORMANCE SO ITS JUST A "just-in-case feature"
-          // (item.modelTarget == this.state.onlyVisible ||
-          //   this.state.onlyVisible == null)
-        ) {
-          return (
-            <ViroARImageMarker
-              key={index}
-              target={item.modelTarget}
-              onAnchorFound={() => {
-                playSound(SOUNDlol2);
-
-                console.log('ANCHOR FOUND BBY');
-                this.setState(
-                  this.state.foundModelTitle === initText
-                    ? {foundModelTitle: [item.modelTitle]}
-                    : {
-                        foundModelTitle: [
-                          ...new Set([
-                            ...this.state.foundModelTitle,
-                            item.modelTitle,
-                          ]),
-                        ],
-                      },
-                );
-
-                if (item.specialAnimations)
-                  this.setState({
-                    specialAnimations: item.specialAnimations,
-                  });
-
-                // this.setState({onlyVisible: item.modelTarget});
-              }}>
-              <Viro3DObject
-                position={item.onGround ? item.positionArray : newPositionArray}
-                source={item.modelSource}
-                resources={item.modelResourcesArr}
-                scale={[
-                  item.modelScale / scaleDivider,
-                  item.modelScale / scaleDivider,
-                  item.modelScale / scaleDivider,
-                ]}
-                type={item.modelType}
-                rotation={item.rotationArray}
-                animation={
-                  item.animationName
-                    ? {
-                        name: this.state.specialAnimationRunning
-                          ? this.state.specialAnimationName
-                          : item.animationName[this.state.selectedAnimationId],
-                        run: true,
-                        loop: true,
-                        onFinish: () => {
-                          this.setState(
-                            {
-                              specialAnimationRunning: false,
-                              specialAnimationName: '',
-                              selectedAnimationId:
-                                this.state.selectedAnimationId + 1 >
-                                item.animationName.length - 1
-                                  ? 0
-                                  : this.state.selectedAnimationId + 1,
-                            },
-                            () => {
-                              let clonedArray = JSON.parse(
-                                JSON.stringify(this.state.markerArrayState),
-                              );
-                              console.log('CLONED MARKER STATE:', clonedArray);
-                              this.setArState(clonedArray); // more performace efficient way);
-                            },
-
-                            // this.arRender();
-                          );
-                        },
-                      }
-                    : null
-                }
-              />
-            </ViroARImageMarker>
-          );
-        }
-      }),
+      ARSCENEchildren: newAR,
     });
 
     const newARSCENE = () => (
       <ViroARScene>
-        <ViroAmbientLight color="#ffffff" />
+        <ViroAmbientLight color="#fff" />
         {this.state.ARSCENEchildren}
       </ViroARScene>
     );
@@ -261,6 +318,9 @@ class DeckView extends Component {
         specialAnimations: modelConstants[subjectId][modelId].specialAnimations
           ? this.addSpecialAnimations(subjectId, modelId)
           : null,
+        singleAnimation: modelConstants[subjectId][modelId].singleAnimation
+          ? true
+          : false,
       };
     };
 
@@ -324,7 +384,27 @@ class DeckView extends Component {
     //// AR stuff onwards
 
     let selectedDeck = JSON.parse(JSON.stringify(deckConstants.playingCards));
-    ViroARTrackingTargets.createTargets(selectedDeck);
+    ViroARTrackingTargets.createTargets({
+      ...selectedDeck,
+      jokerBlack: {
+        source: require('../assets/cards/cjoker-black.jpeg'),
+        orientation: 'Up',
+        physicalWidth: 0.064,
+      },
+      jokerRed: {
+        source: require('../assets/cards/cjoker-red.jpeg'),
+        orientation: 'Up',
+        physicalWidth: 0.064,
+      },
+    });
+    ViroAnimations.registerAnimations({
+      rotate: {
+        properties: {
+          rotateY: '+=90',
+        },
+        duration: 3000,
+      },
+    });
 
     if (this.state.ARSCENE === null) console.log('ARSCENE IS NULL');
 
@@ -332,9 +412,11 @@ class DeckView extends Component {
       <>
         {this.state.ARSCENE}
         <Text style={styles.title}>
-          {this.state.foundModelTitle.reduce(
-            (prev, curr) => (prev = prev + ' | ' + curr),
-          )}
+          {this.state.endOfPresentation
+            ? endOfPresentationText
+            : this.state.foundModelTitle.reduce(
+                (prev, curr) => (prev = prev + ' | ' + curr),
+              )}
         </Text>
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
