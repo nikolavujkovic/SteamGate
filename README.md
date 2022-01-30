@@ -1,3 +1,3 @@
 # SteamGate :)
 
-imamo svega i svacega
+It took 28 days.
